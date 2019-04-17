@@ -4,10 +4,14 @@ This repository contains the starter skeleton code for the CS221 project.
 
 ### Finished tasks:
 ##### Project 1
-1. Task 1: Implement a simple tokenizer based on punctuations and white spaces -> **Passed all test cases**
-1. Task 2: Implement a Dynamic-Programming based Word-Break Tokenizer -> **Passed all test cases**
-1. Task 3: Incorporate a Porter stemmer -> **Passed all test cases**
-1. Task 4: Implement a dynamic-programming based Chinese or Japanese tokenizer -> **Passed all test cases**
+
+- Task 1: Implement a simple tokenizer based on punctuations and white spaces -> **Passed all test cases**
+
+- Task 2: Implement a Dynamic-Programming based Word-Break Tokenizer -> **Passed all test cases**
+
+- Task 3: Incorporate a Porter stemmer -> **Passed all test cases**
+
+- Task 4: Implement a dynamic-programming based Japanese tokenizer -> **Passed all test cases**
 
 ### To run this example:
 1. clone this repository using `git clone https://github.com/UCI-Chenli-teaching/spring19-cs221-project.git`
