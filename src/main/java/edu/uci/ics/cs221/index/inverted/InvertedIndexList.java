@@ -14,7 +14,8 @@ public class InvertedIndexList {
 
     public void addDocID(String keyword, int docID){
         if(indexList.containsKey(keyword)){
-            indexList.get(keyword).add(docID);
+            if(indexList.get(keyword).get(indexList.get(keyword).size()-1) != docID)
+                indexList.get(keyword).add(docID);
         }else{
             List<Integer> temp = new ArrayList<>();
             temp.add(docID);
@@ -36,6 +37,11 @@ public class InvertedIndexList {
         }else{
             indexList.put(keyword, list);
         }
+    }
+
+    public List<Integer> getDocIDList(String keyword){
+        if(!indexList.containsKey(keyword)) return null;
+        return indexList.get(keyword);
     }
 
     public Map<String, List<Integer>> returnMap(){

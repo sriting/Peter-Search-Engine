@@ -63,8 +63,9 @@ public class Team1StressTest {
      */
     @Test(timeout = 300000)
     public void test1() {
-        for (Document doc: largeDocs)
+        for (Document doc: largeDocs){
             iim.addDocument(doc);
+        }
 
         assertEquals(iim.getNumSegments(), 2);
 
@@ -84,7 +85,10 @@ public class Team1StressTest {
 
         int count = 0;
         while(itr.hasNext()){
-            itr.next();
+            String str = itr.next().getText();
+//            System.out.println(str.contains("university"));
+//            System.out.print(str.equals(largeDocs[0].getText())+":");
+//            System.out.println(str.equals(largeDocs[1].getText()));
             count++;
         }
 

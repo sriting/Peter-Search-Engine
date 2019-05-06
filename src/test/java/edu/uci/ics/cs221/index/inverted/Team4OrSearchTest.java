@@ -52,10 +52,6 @@ public class Team4OrSearchTest {
 
         // Make query
         Iterator<Document> results = manager.searchOrQuery(keywords);
-        Iterator<Document> resultsTest = manager.searchOrQuery(keywords);
-        while(resultsTest.hasNext()){
-            System.out.println(resultsTest.next());
-        }
 
         // Assertion
         for (int i = 0; results.hasNext(); i++) {

@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="41c8792b-e430-4027-899f-1b5757ef013b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team1StressTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team1StressTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team4OrSearchTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team4OrSearchTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -29,25 +32,25 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="369" column="41" selection-start-line="369" selection-start-column="41" selection-end-line="369" selection-end-column="41" />
+            <state relative-caret-position="226">
+              <caret line="93" column="58" selection-start-line="93" selection-start-column="58" selection-end-line="93" selection-end-column="58" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#27038#27039#0" expanded="true" />
-                <element signature="e#27305#27306#0" expanded="true" />
+                <element signature="e#26385#26386#0" expanded="true" />
+                <element signature="e#26652#26653#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team1StressTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="428">
-              <caret line="90" selection-start-line="90" selection-end-line="90" />
+            <state relative-caret-position="223">
+              <caret line="64" column="20" selection-start-line="64" selection-start-column="20" selection-end-line="64" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -55,7 +58,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/PageFileChannel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="98">
+            <state relative-caret-position="186">
               <caret line="116" column="26" selection-start-line="116" selection-start-column="26" selection-end-line="116" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -74,27 +77,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/DictionaryElement.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
-              <folding>
-                <element signature="e#462#463#0" expanded="true" />
-                <element signature="e#488#489#0" expanded="true" />
-                <element signature="e#529#530#0" expanded="true" />
-                <element signature="e#555#556#0" expanded="true" />
-                <element signature="e#597#598#0" expanded="true" />
-                <element signature="e#631#632#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="70">
-              <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+            <state relative-caret-position="171">
+              <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#256#257#0" expanded="true" />
@@ -125,6 +111,7 @@
       <find>writeDictAndList</find>
       <find>println</find>
       <find>print</find>
+      <find>indexList</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -139,7 +126,6 @@
         <option value="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team22FlushTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team17FlushTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team18FlushTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexList.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/DictionaryElement.java" />
         <option value="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team14MergeTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team12MergeTest.java" />
@@ -149,10 +135,11 @@
         <option value="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team8KeywordSearchTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team6AndSearchTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team5OrSearchTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team1StressTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team2StressTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team4OrSearchTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/analysis/Main.java" />
+        <option value="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team4OrSearchTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team1StressTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexList.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexManager.java" />
       </list>
     </option>
@@ -274,8 +261,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.Team1StressTest">
-    <configuration name="Team19FlushTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.Team22FlushTest">
+    <configuration name="Team11MergeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cs221" />
       <extension name="coverage">
         <pattern>
@@ -284,13 +271,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="edu.uci.ics.cs221.index.inverted" />
-      <option name="MAIN_CLASS_NAME" value="edu.uci.ics.cs221.index.inverted.Team19FlushTest" />
+      <option name="MAIN_CLASS_NAME" value="edu.uci.ics.cs221.index.inverted.Team11MergeTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Team1StressTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Team12MergeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cs221" />
       <extension name="coverage">
         <pattern>
@@ -299,13 +286,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="edu.uci.ics.cs221.index.inverted" />
-      <option name="MAIN_CLASS_NAME" value="edu.uci.ics.cs221.index.inverted.Team1StressTest" />
+      <option name="MAIN_CLASS_NAME" value="edu.uci.ics.cs221.index.inverted.Team12MergeTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Team21FlushTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Team17FlushTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cs221" />
       <extension name="coverage">
         <pattern>
@@ -314,13 +301,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="edu.uci.ics.cs221.index.inverted" />
-      <option name="MAIN_CLASS_NAME" value="edu.uci.ics.cs221.index.inverted.Team21FlushTest" />
+      <option name="MAIN_CLASS_NAME" value="edu.uci.ics.cs221.index.inverted.Team17FlushTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Team2StressTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Team20FlushTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cs221" />
       <extension name="coverage">
         <pattern>
@@ -329,13 +316,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="edu.uci.ics.cs221.index.inverted" />
-      <option name="MAIN_CLASS_NAME" value="edu.uci.ics.cs221.index.inverted.Team2StressTest" />
+      <option name="MAIN_CLASS_NAME" value="edu.uci.ics.cs221.index.inverted.Team20FlushTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Team8KeywordSearchTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Team22FlushTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cs221" />
       <extension name="coverage">
         <pattern>
@@ -344,7 +331,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="edu.uci.ics.cs221.index.inverted" />
-      <option name="MAIN_CLASS_NAME" value="edu.uci.ics.cs221.index.inverted.Team8KeywordSearchTest" />
+      <option name="MAIN_CLASS_NAME" value="edu.uci.ics.cs221.index.inverted.Team22FlushTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -352,11 +339,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.Team1StressTest" />
-        <item itemvalue="JUnit.Team2StressTest" />
-        <item itemvalue="JUnit.Team8KeywordSearchTest" />
-        <item itemvalue="JUnit.Team21FlushTest" />
-        <item itemvalue="JUnit.Team19FlushTest" />
+        <item itemvalue="JUnit.Team22FlushTest" />
+        <item itemvalue="JUnit.Team20FlushTest" />
+        <item itemvalue="JUnit.Team17FlushTest" />
+        <item itemvalue="JUnit.Team12MergeTest" />
+        <item itemvalue="JUnit.Team11MergeTest" />
       </list>
     </recent_temporary>
   </component>
@@ -378,47 +365,48 @@
       <workItem from="1556337747519" duration="279000" />
       <workItem from="1556667906581" duration="207000" />
       <workItem from="1556683186698" duration="2818000" />
-      <workItem from="1556942768665" duration="101015000" />
+      <workItem from="1556942768665" duration="105983000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Team11MergeTest - 2019.05.05 at 23h 47m 17s.xml">
-      <configuration name="Team11MergeTest" configurationId="JUnit" />
+    <history-entry file="Team1StressTest_test1 - 2019.05.06 at 01h 12m 53s.xml">
+      <configuration name="Team1StressTest.test1" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="Team12MergeTest - 2019.05.05 at 23h 47m 26s.xml">
-      <configuration name="Team12MergeTest" configurationId="JUnit" />
+    <history-entry file="Team1StressTest_test1 - 2019.05.06 at 01h 15m 53s.xml">
+      <configuration name="Team1StressTest.test1" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="Team14MergeTest - 2019.05.05 at 23h 47m 47s.xml">
-      <configuration name="Team14MergeTest" configurationId="JUnit" />
+    <history-entry file="Team1StressTest - 2019.05.06 at 01h 16m 07s.xml">
+      <configuration name="Team1StressTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="Team5OrSearchTest - 2019.05.05 at 23h 47m 52s.xml">
+    <history-entry file="Team5OrSearchTest - 2019.05.06 at 01h 16m 31s.xml">
       <configuration name="Team5OrSearchTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="Team6AndSearchTest - 2019.05.05 at 23h 47m 56s.xml">
+    <history-entry file="Team4OrSearchTest - 2019.05.06 at 01h 16m 40s.xml">
+      <configuration name="Team4OrSearchTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Team6AndSearchTest - 2019.05.06 at 01h 16m 45s.xml">
       <configuration name="Team6AndSearchTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="Team19FlushTest - 2019.05.05 at 23h 48m 02s.xml">
-      <configuration name="Team19FlushTest" configurationId="JUnit" />
+    <history-entry file="Team7AndSearchTest - 2019.05.06 at 01h 16m 50s.xml">
+      <configuration name="Team7AndSearchTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="Team21FlushTest - 2019.05.05 at 23h 48m 07s.xml">
-      <configuration name="Team21FlushTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="Team8KeywordSearchTest - 2019.05.05 at 23h 48m 11s.xml">
+    <history-entry file="Team8KeywordSearchTest - 2019.05.06 at 01h 16m 54s.xml">
       <configuration name="Team8KeywordSearchTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="Team2StressTest - 2019.05.05 at 23h 49m 02s.xml">
-      <configuration name="Team2StressTest" configurationId="JUnit" />
+    <history-entry file="Team9KeywordSearchTest - 2019.05.06 at 01h 16m 58s.xml">
+      <configuration name="Team9KeywordSearchTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="Team1StressTest - 2019.05.05 at 23h 49m 16s.xml">
-      <configuration name="Team1StressTest" configurationId="JUnit" />
+    <history-entry file="Team10MergeTest - 2019.05.06 at 01h 17m 03s.xml">
+      <configuration name="Team10MergeTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="122883000" />
+    <option name="totallyTimeSpent" value="127851000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="804" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27825466" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -429,7 +417,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286517" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33988765" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49928468" visible="true" weight="0.40449437" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3988764" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -438,7 +426,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5007153" side_tool="true" weight="0.33988765" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.3286517" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -730,24 +718,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team6AndSearchTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1170">
-          <caret line="142" column="39" selection-start-line="142" selection-start-column="27" selection-end-line="142" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team5OrSearchTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1323">
           <caret line="132" column="14" lean-forward="true" selection-start-line="132" selection-start-column="14" selection-end-line="132" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team4OrSearchTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="55" selection-start-line="55" selection-end-line="57" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -758,46 +732,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/analysis/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="71" selection-start-line="71" selection-end-line="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team3StressTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="43" column="33" selection-start-line="43" selection-start-column="33" selection-end-line="43" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team11MergeTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="311">
           <caret line="113" column="8" selection-start-line="113" selection-start-column="8" selection-end-line="113" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="70">
-          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#256#257#0" expanded="true" />
-            <element signature="e#304#305#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/PageFileChannel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="116" column="26" selection-start-line="116" selection-start-column="26" selection-end-line="116" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -808,10 +746,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team3StressTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-149">
+          <caret line="43" column="33" selection-start-line="43" selection-start-column="33" selection-end-line="43" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team4OrSearchTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team6AndSearchTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="114" selection-start-line="114" selection-end-line="114" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/DictionaryElement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+        <state relative-caret-position="75">
+          <caret line="5" column="16" lean-forward="true" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
           <folding>
             <element signature="e#462#463#0" expanded="true" />
             <element signature="e#488#489#0" expanded="true" />
@@ -823,22 +782,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexManager.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/analysis/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="71" selection-start-line="71" selection-end-line="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/PageFileChannel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="186">
-          <caret line="369" column="41" selection-start-line="369" selection-start-column="41" selection-end-line="369" selection-end-column="41" />
+          <caret line="116" column="26" selection-start-line="116" selection-start-column="26" selection-end-line="116" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#27038#27039#0" expanded="true" />
-            <element signature="e#27305#27306#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team1StressTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
-          <caret line="90" selection-start-line="90" selection-end-line="90" />
+        <state relative-caret-position="223">
+          <caret line="64" column="20" selection-start-line="64" selection-start-column="20" selection-end-line="64" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#256#257#0" expanded="true" />
+            <element signature="e#304#305#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="93" column="58" selection-start-line="93" selection-start-column="58" selection-end-line="93" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#26385#26386#0" expanded="true" />
+            <element signature="e#26652#26653#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

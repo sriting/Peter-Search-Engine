@@ -1,15 +1,10 @@
 package edu.uci.ics.cs221.index.inverted;
 
 import com.google.common.base.Preconditions;
-import com.sun.tools.corba.se.idl.InterfaceGen;
 import edu.uci.ics.cs221.analysis.Analyzer;
-import edu.uci.ics.cs221.analysis.ComposableAnalyzer;
-import edu.uci.ics.cs221.analysis.PunctuationTokenizer;
 import edu.uci.ics.cs221.storage.Document;
 import edu.uci.ics.cs221.storage.DocumentStore;
 import edu.uci.ics.cs221.storage.MapdbDocStore;
-import net.jpountz.util.ByteBufferUtils;
-import sun.jvm.hotspot.debugger.Page;
 
 import java.io.File;
 import java.io.IOException;
@@ -211,10 +206,7 @@ public class InvertedIndexManager {
             }
         }
         dictChannel.appendAllBytes(dictByteBuffer);
-//        // append the last page of dictionary
-//        if (dictByteBuffer.position() > 0) {
-//            appendLastPage(dictByteBuffer, dictChannel);
-//        }
+
         // append the last page of list
         if (listByteBuffer.position() > 0) {
             appendLastPage(listByteBuffer, listChannel);
@@ -366,7 +358,6 @@ public class InvertedIndexManager {
 
             // add element into dictionary map
             DictionaryElement dictElem = new DictionaryElement(offset,length,pageNum);
-//            System.out.println(offset);
             dictList.put(keyword,dictElem);
         }
         return dictList;
@@ -383,19 +374,16 @@ public class InvertedIndexManager {
         byte[] docIDList = thisPage.array();
         byte[] docIDArr = new byte[length];
         if(offset+length > PageFileChannel.PAGE_SIZE){
-//            System.out.println(offset+" "+(offset+length));
             byte[] docIDArr1 = Arrays.copyOfRange(docIDList, offset, PageFileChannel.PAGE_SIZE);
-//            System.arraycopy(docIDList,offset,docIDArr,0,PageFileChannel.PAGE_SIZE-offset);
             docIDList = nextPage.array();
             byte[] docIDArr2 = Arrays.copyOfRange(docIDList, 0, offset+length-PageFileChannel.PAGE_SIZE);
-//            System.arraycopy(docIDList,0,docIDArr,PageFileChannel.PAGE_SIZE-offset,length-PageFileChannel.PAGE_SIZE+offset);
             System.arraycopy(docIDArr1, 0, docIDArr, 0, docIDArr1.length);
             System.arraycopy(docIDArr2, 0, docIDArr, docIDArr1.length, docIDArr2.length);
         }else{
             docIDArr = Arrays.copyOfRange(docIDList, offset, offset+length);
-//            System.arraycopy(docIDList,offset,docIDArr,0,length);
         }
 
+//        System.out.println(length);
         List<Integer> indexList = new ArrayList<>();
         for(int j = 0; j < length; j += 4){
             byte[] docIDNum = Arrays.copyOfRange(docIDArr,j, j+4);
@@ -435,7 +423,9 @@ public class InvertedIndexManager {
                 ByteBuffer thisPage = listChannel.readPage(dictionary.get(keyword).getPageNum());
                 ByteBuffer nextPage = listChannel.readPage(dictionary.get(keyword).getPageNum()+1);
                 List<Integer> invertedList = readInvertedList(thisPage, nextPage, dictionary.get(keyword));
+                System.out.println(invertedList.size());
                 for(int index : invertedList){
+                    System.out.println(index);
                     queryResult.add(documentStore.getDocument(index));
                 }
             }
@@ -696,7 +686,6 @@ public class InvertedIndexManager {
             List<Integer> indexList = new ArrayList<>();
             for(int j = 0; j < length; j += 4){
                 byte[] docIDNum = Arrays.copyOfRange(docIDArr,j, j+4);
-//                System.arraycopy(docIDArr, j, docIDNum,0,4);
                 indexList.add(ByteBuffer.wrap(docIDNum).getInt());
             }
 
