@@ -1,13 +1,13 @@
 package edu.uci.ics.cs221.analysis.punctuation;
 
 import edu.uci.ics.cs221.analysis.PunctuationTokenizer;
-import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class Team7PunctuationTokenizerTest {
 

@@ -10,8 +10,10 @@ import static org.junit.Assert.assertEquals;
 /*
 - What's your team number?
 Team 6
+
 - What is the functionality being tested?
 Punctuation Tokenizer
+
 - Describe your tests briefly:
 Test Case 1 is to test if the tokenizer handles different white spaces correctly by having characters of \t,
 \n and white spaces in the input text.
@@ -20,8 +22,11 @@ The punctuations include ",", ".", ";", "?" and "!". Moreover, punctuation marks
 considered, such as i'am and four-year-old.
 Test Case 3 is to test if the tokenizer can convert all tokens into lower case.
 Test Case 4 is to test if the tokenizer can filter out the stop words.
+
 - Does each test case have comments/documentation?
 Yes
+
+
  */
 
 public class Team6PunctuationTokenizerTest {
@@ -36,7 +41,7 @@ public class Team6PunctuationTokenizerTest {
 
         String text = " testcase\tgood example\nyes great example\n";
         List<String> expected = Arrays.asList("testcase", "good", "example",
-                "yes", "great", "example");
+               "yes", "great", "example");
         PunctuationTokenizer tokenizer = new PunctuationTokenizer();
         assertEquals(expected, tokenizer.tokenize(text));
     }

@@ -47,7 +47,7 @@ public class Team11WordBreakTokenizerTest {
         String text = "searchnewtimeuse";
         List<String> expected = Arrays.asList("search", "new", "time", "use");
         WordBreakTokenizer tokenizer = new WordBreakTokenizer();
-
+        
         assertEquals(expected, tokenizer.tokenize(text));
     }
 
@@ -57,7 +57,7 @@ public class Team11WordBreakTokenizerTest {
         String text = "seaRchneWtiMeuSe";
         List<String> expected = Arrays.asList("search", "new", "time", "use");
         WordBreakTokenizer tokenizer = new WordBreakTokenizer();
-
+        
         assertEquals(expected, tokenizer.tokenize(text));
     }
 
@@ -67,7 +67,7 @@ public class Team11WordBreakTokenizerTest {
         String text = "SEARCHNEWTIMEUSE";
         List<String> expected = Arrays.asList("search", "new", "time", "use");
         WordBreakTokenizer tokenizer = new WordBreakTokenizer();
-
+        
         assertEquals(expected, tokenizer.tokenize(text));
     }
 
@@ -77,7 +77,7 @@ public class Team11WordBreakTokenizerTest {
         String text = "thesearchnewtimeuse";
         List<String> expected = Arrays.asList("search", "new", "time", "use");
         WordBreakTokenizer tokenizer = new WordBreakTokenizer();
-
+        
         assertEquals(expected, tokenizer.tokenize(text));
     }
 
@@ -87,7 +87,7 @@ public class Team11WordBreakTokenizerTest {
         String text = "searchthenewtimeuse";
         List<String> expected = Arrays.asList("search", "new", "time", "use");
         WordBreakTokenizer tokenizer = new WordBreakTokenizer();
-
+        
         assertEquals(expected, tokenizer.tokenize(text));
     }
 
@@ -97,7 +97,7 @@ public class Team11WordBreakTokenizerTest {
         String text = "searchnewtimeusethe";
         List<String> expected = Arrays.asList("search", "new", "time", "use");
         WordBreakTokenizer tokenizer = new WordBreakTokenizer();
-
+        
         assertEquals(expected, tokenizer.tokenize(text));
     }
 }
