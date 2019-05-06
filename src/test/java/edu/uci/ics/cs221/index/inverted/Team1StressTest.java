@@ -85,10 +85,7 @@ public class Team1StressTest {
 
         int count = 0;
         while(itr.hasNext()){
-            String str = itr.next().getText();
-//            System.out.println(str.contains("university"));
-//            System.out.print(str.equals(largeDocs[0].getText())+":");
-//            System.out.println(str.equals(largeDocs[1].getText()));
+            itr.next();
             count++;
         }
 
@@ -109,6 +106,7 @@ public class Team1StressTest {
 
         Iterator<Document> itr =
                 iim.searchAndQuery(Arrays.asList("GibberishThatNotInDoc", "university"));
+
         assertTrue(!itr.hasNext());
     }
 

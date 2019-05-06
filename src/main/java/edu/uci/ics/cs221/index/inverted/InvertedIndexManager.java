@@ -383,7 +383,6 @@ public class InvertedIndexManager {
             docIDArr = Arrays.copyOfRange(docIDList, offset, offset+length);
         }
 
-//        System.out.println(length);
         List<Integer> indexList = new ArrayList<>();
         for(int j = 0; j < length; j += 4){
             byte[] docIDNum = Arrays.copyOfRange(docIDArr,j, j+4);
@@ -423,9 +422,7 @@ public class InvertedIndexManager {
                 ByteBuffer thisPage = listChannel.readPage(dictionary.get(keyword).getPageNum());
                 ByteBuffer nextPage = listChannel.readPage(dictionary.get(keyword).getPageNum()+1);
                 List<Integer> invertedList = readInvertedList(thisPage, nextPage, dictionary.get(keyword));
-                System.out.println(invertedList.size());
                 for(int index : invertedList){
-                    System.out.println(index);
                     queryResult.add(documentStore.getDocument(index));
                 }
             }
@@ -467,9 +464,11 @@ public class InvertedIndexManager {
             int pageNum = 0; boolean isFirst = true;
             ByteBuffer thisPage =  listChannel.readPage(pageNum);
             ByteBuffer nextPage = listChannel.readPage(pageNum+1);
+//            System.out.println(documentStore.size());
+            Map<String, DictionaryElement> dictionary = readDictionary(dictChannel);
+//            System.out.println(dictionary.containsKey("GibberishThatNotInDoc"));
 
             for(String keyword : keywords) {
-                Map<String, DictionaryElement> dictionary = readDictionary(dictChannel);
                 if (dictionary.containsKey(keyword)) {
                     if(dictionary.get(keyword).getPageNum() != pageNum) {
                         pageNum = dictionary.get(keyword).getPageNum();
@@ -505,6 +504,8 @@ public class InvertedIndexManager {
                         }
                         andList = newAndList;
                     }
+                }else if(i==0){
+                    return queryResult.iterator();
                 }
             }
 
