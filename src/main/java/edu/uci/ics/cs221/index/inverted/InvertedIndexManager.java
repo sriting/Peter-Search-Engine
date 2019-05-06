@@ -179,7 +179,7 @@ public class InvertedIndexManager {
 
             int length = list.size() * 4;
             if (!listByteBuffer.hasRemaining()) {
-                listPageNum++;
+                listPageNum++;offset=0;
                 listChannel.appendPage(listByteBuffer);
                 listByteBuffer.clear();
             }
@@ -366,6 +366,7 @@ public class InvertedIndexManager {
 
             // add element into dictionary map
             DictionaryElement dictElem = new DictionaryElement(offset,length,pageNum);
+//            System.out.println(offset);
             dictList.put(keyword,dictElem);
         }
         return dictList;
@@ -382,11 +383,17 @@ public class InvertedIndexManager {
         byte[] docIDList = thisPage.array();
         byte[] docIDArr = new byte[length];
         if(offset+length > PageFileChannel.PAGE_SIZE){
-            System.arraycopy(docIDList,offset,docIDArr,0,PageFileChannel.PAGE_SIZE-offset);
+//            System.out.println(offset+" "+(offset+length));
+            byte[] docIDArr1 = Arrays.copyOfRange(docIDList, offset, PageFileChannel.PAGE_SIZE);
+//            System.arraycopy(docIDList,offset,docIDArr,0,PageFileChannel.PAGE_SIZE-offset);
             docIDList = nextPage.array();
-            System.arraycopy(docIDList,0,docIDArr,PageFileChannel.PAGE_SIZE-offset,length-PageFileChannel.PAGE_SIZE+offset);
+            byte[] docIDArr2 = Arrays.copyOfRange(docIDList, 0, offset+length-PageFileChannel.PAGE_SIZE);
+//            System.arraycopy(docIDList,0,docIDArr,PageFileChannel.PAGE_SIZE-offset,length-PageFileChannel.PAGE_SIZE+offset);
+            System.arraycopy(docIDArr1, 0, docIDArr, 0, docIDArr1.length);
+            System.arraycopy(docIDArr2, 0, docIDArr, docIDArr1.length, docIDArr2.length);
         }else{
-            System.arraycopy(docIDList,offset,docIDArr,0,length);
+            docIDArr = Arrays.copyOfRange(docIDList, offset, offset+length);
+//            System.arraycopy(docIDList,offset,docIDArr,0,length);
         }
 
         List<Integer> indexList = new ArrayList<>();
