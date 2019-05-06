@@ -2,46 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="41c8792b-e430-4027-899f-1b5757ef013b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/DictionaryElement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team17FlushTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team4OrSearchTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/analysis/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/analysis/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/storage/DocumentStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/storage/DocumentStore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/storage/MapdbDocStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/storage/MapdbDocStore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/punctuation/Team1PunctuationTokenizerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/punctuation/Team1PunctuationTokenizerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/punctuation/Team2PunctuationTokenizerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/punctuation/Team2PunctuationTokenizerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/punctuation/Team4PunctuationTokenizerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/punctuation/Team4PunctuationTokenizerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/punctuation/Team5PunctuationTokenizerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/punctuation/Team5PunctuationTokenizerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/punctuation/Team6PunctuationTokenizerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/punctuation/Team6PunctuationTokenizerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/punctuation/Team7PunctuationTokenizerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/punctuation/Team7PunctuationTokenizerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/stemmer/Team18PorterStemmerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/stemmer/Team18PorterStemmerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/stemmer/Team19PorterStemmerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/stemmer/Team19PorterStemmerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/stemmer/Team20PorterStemmerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/stemmer/Team20PorterStemmerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/stemmer/Team21PorterStemmerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/stemmer/Team21PorterStemmerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/stemmer/Team22PorterStemmerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/stemmer/Team22PorterStemmerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/stemmer/Team23PorterStemmerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/stemmer/Team23PorterStemmerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/wordbreak/Team10WordBreakTokenizerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/wordbreak/Team10WordBreakTokenizerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/wordbreak/Team11WordBreakTokenizerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/wordbreak/Team11WordBreakTokenizerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/wordbreak/Team12WordBreakTokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/wordbreak/Team12WordBreakTokenizer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/wordbreak/Team17WordBreakTokenizerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/wordbreak/Team17WordBreakTokenizerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/wordbreak/Team8WordBreakTokenizerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/wordbreak/Team8WordBreakTokenizerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/wordbreak/Team9WordBreakTokenizerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/wordbreak/Team9WordBreakTokenizerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/wordbreak/WordBreakTokenizerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/wordbreak/WordBreakTokenizerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/edu/uci/ics/cs221/analysis/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/uci/ics/cs221/analysis/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/edu/uci/ics/cs221/storage/DocumentStore.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/uci/ics/cs221/storage/DocumentStore.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/edu/uci/ics/cs221/storage/MapdbDocStore.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/uci/ics/cs221/storage/MapdbDocStore.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/cs221-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/cs221-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/edu/uci/ics/cs221/analysis/punctuation/Team6PunctuationTokenizerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/edu/uci/ics/cs221/analysis/punctuation/Team6PunctuationTokenizerTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/edu/uci/ics/cs221/analysis/wordbreak/Team9WordBreakTokenizerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/edu/uci/ics/cs221/analysis/wordbreak/Team9WordBreakTokenizerTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/edu/uci/ics/cs221/analysis/wordbreak/WordBreakTokenizerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/edu/uci/ics/cs221/analysis/wordbreak/WordBreakTokenizerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexManager.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -71,31 +32,34 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="402" column="42" selection-start-line="402" selection-start-column="42" selection-end-line="402" selection-end-column="42" />
+            <state relative-caret-position="197">
+              <caret line="354" column="34" selection-start-line="354" selection-start-column="34" selection-end-line="354" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#28866#28867#0" expanded="true" />
-                <element signature="e#29133#29134#0" expanded="true" />
+                <element signature="e#26474#26475#0" expanded="true" />
+                <element signature="e#26741#26742#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team11MergeTest.java">
+        <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team22FlushTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="113" column="8" selection-start-line="113" selection-start-column="8" selection-end-line="113" selection-end-column="8" />
+            <state relative-caret-position="528">
+              <caret line="276" column="21" selection-start-line="276" selection-start-column="21" selection-end-line="276" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team3StressTest.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/PageFileChannel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="43" column="33" selection-start-line="43" selection-start-column="33" selection-end-line="43" selection-end-column="33" />
+            <state relative-caret-position="98">
+              <caret line="116" column="26" selection-start-line="116" selection-start-column="26" selection-end-line="116" selection-end-column="26" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -105,15 +69,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="75">
               <caret line="71" selection-start-line="71" selection-end-line="71" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team1StressTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="90" column="8" selection-start-line="90" selection-start-column="8" selection-end-line="90" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -138,7 +93,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="89">
+            <state relative-caret-position="70">
               <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -169,6 +124,7 @@
       <find>getDictionary</find>
       <find>writeDictAndList</find>
       <find>println</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -265,15 +221,6 @@
               <item name="cs221" type="b2602c69:ProjectViewProjectNode" />
               <item name="cs221-spring19-team-21" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="cs221" type="462c0819:PsiDirectoryNode" />
-              <item name="storage" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cs221" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cs221-spring19-team-21" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -327,7 +274,22 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.Team1StressTest">
+  <component name="RunManager" selected="JUnit.Team22FlushTest">
+    <configuration name="Team18FlushTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="cs221" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.uci.ics.cs221.index.inverted.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="edu.uci.ics.cs221.index.inverted" />
+      <option name="MAIN_CLASS_NAME" value="edu.uci.ics.cs221.index.inverted.Team18FlushTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Team19FlushTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cs221" />
       <extension name="coverage">
@@ -338,21 +300,6 @@
       </extension>
       <option name="PACKAGE_NAME" value="edu.uci.ics.cs221.index.inverted" />
       <option name="MAIN_CLASS_NAME" value="edu.uci.ics.cs221.index.inverted.Team19FlushTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Team1StressTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="cs221" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="edu.uci.ics.cs221.index.inverted.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="edu.uci.ics.cs221.index.inverted" />
-      <option name="MAIN_CLASS_NAME" value="edu.uci.ics.cs221.index.inverted.Team1StressTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -405,11 +352,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.Team1StressTest" />
         <item itemvalue="JUnit.Team22FlushTest" />
         <item itemvalue="JUnit.Team21FlushTest" />
         <item itemvalue="JUnit.Team20FlushTest" />
         <item itemvalue="JUnit.Team19FlushTest" />
+        <item itemvalue="JUnit.Team18FlushTest" />
       </list>
     </recent_temporary>
   </component>
@@ -431,44 +378,44 @@
       <workItem from="1556337747519" duration="279000" />
       <workItem from="1556667906581" duration="207000" />
       <workItem from="1556683186698" duration="2818000" />
-      <workItem from="1556942768665" duration="92376000" />
+      <workItem from="1556942768665" duration="99302000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Team12MergeTest - 2019.05.05 at 21h 22m 23s.xml">
-      <configuration name="Team12MergeTest" configurationId="JUnit" />
+    <history-entry file="Team4OrSearchTest - 2019.05.05 at 23h 05m 12s.xml">
+      <configuration name="Team4OrSearchTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="Team14MergeTest - 2019.05.05 at 21h 22m 45s.xml">
-      <configuration name="Team14MergeTest" configurationId="JUnit" />
+    <history-entry file="Team11MergeTest - 2019.05.05 at 23h 05m 18s.xml">
+      <configuration name="Team11MergeTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="Team17FlushTest - 2019.05.05 at 21h 22m 51s.xml">
-      <configuration name="Team17FlushTest" configurationId="JUnit" />
+    <history-entry file="Team10MergeTest - 2019.05.05 at 23h 05m 42s.xml">
+      <configuration name="Team10MergeTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="Team18FlushTest - 2019.05.05 at 21h 22m 57s.xml">
-      <configuration name="Team18FlushTest" configurationId="JUnit" />
+    <history-entry file="Team10MergeTest - 2019.05.05 at 23h 17m 58s.xml">
+      <configuration name="Team10MergeTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="Team19FlushTest - 2019.05.05 at 21h 23m 02s.xml">
-      <configuration name="Team19FlushTest" configurationId="JUnit" />
+    <history-entry file="Team11MergeTest - 2019.05.05 at 23h 18m 05s.xml">
+      <configuration name="Team11MergeTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="Team20FlushTest - 2019.05.05 at 21h 23m 06s.xml">
-      <configuration name="Team20FlushTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="Team21FlushTest - 2019.05.05 at 21h 23m 12s.xml">
-      <configuration name="Team21FlushTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="Team22FlushTest - 2019.05.05 at 21h 23m 38s.xml">
-      <configuration name="Team22FlushTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="Team1StressTest - 2019.05.05 at 21h 23m 50s.xml">
+    <history-entry file="Team1StressTest - 2019.05.05 at 23h 18m 15s.xml">
       <configuration name="Team1StressTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="Team1StressTest - 2019.05.05 at 21h 24m 24s.xml">
-      <configuration name="Team1StressTest" configurationId="JUnit" />
+    <history-entry file="Team2StressTest - 2019.05.05 at 23h 19m 09s.xml">
+      <configuration name="Team2StressTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Team3StressTest - 2019.05.05 at 23h 19m 21s.xml">
+      <configuration name="Team3StressTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Team4OrSearchTest - 2019.05.05 at 23h 19m 27s.xml">
+      <configuration name="Team4OrSearchTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Team5OrSearchTest - 2019.05.05 at 23h 19m 40s.xml">
+      <configuration name="Team5OrSearchTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="114244000" />
+    <option name="totallyTimeSpent" value="121170000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="804" extended-state="0" />
@@ -483,7 +430,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286517" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.42696628" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33988765" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3988764" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -634,13 +581,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team22FlushTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="115" column="8" selection-start-line="115" selection-start-column="8" selection-end-line="115" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team18FlushTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
@@ -739,18 +679,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#256#257#0" expanded="true" />
-            <element signature="e#304#305#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_201.jdk/Contents/Home/src.zip!/java/nio/HeapByteBuffer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="156">
@@ -817,16 +745,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/PageFileChannel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="84" column="32" selection-start-line="84" selection-start-column="32" selection-end-line="84" selection-end-column="63" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/DictionaryElement.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -856,13 +774,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team1StressTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="90" column="8" selection-start-line="90" selection-start-column="8" selection-end-line="90" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/analysis/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -877,21 +788,57 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team1StressTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="70" column="12" selection-start-line="70" selection-start-column="12" selection-end-line="70" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team11MergeTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
+        <state relative-caret-position="311">
           <caret line="113" column="8" selection-start-line="113" selection-start-column="8" selection-end-line="113" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="70">
+          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#256#257#0" expanded="true" />
+            <element signature="e#304#305#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/PageFileChannel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98">
+          <caret line="116" column="26" selection-start-line="116" selection-start-column="26" selection-end-line="116" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team22FlushTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="276" column="21" selection-start-line="276" selection-start-column="21" selection-end-line="276" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="402" column="42" selection-start-line="402" selection-start-column="42" selection-end-line="402" selection-end-column="42" />
+        <state relative-caret-position="197">
+          <caret line="354" column="34" selection-start-line="354" selection-start-column="34" selection-end-line="354" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#28866#28867#0" expanded="true" />
-            <element signature="e#29133#29134#0" expanded="true" />
+            <element signature="e#26474#26475#0" expanded="true" />
+            <element signature="e#26741#26742#0" expanded="true" />
           </folding>
         </state>
       </provider>

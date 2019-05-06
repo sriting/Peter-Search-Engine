@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -48,6 +49,8 @@ public class InvertedIndexManager {
     public InvertedIndexList indexList = new InvertedIndexList();
     private int docID = 0;
     public int segmentCount = 0;
+    private int dicBufferLen = 0;
+    private int mergeBufferLen = 0;
 
     // a structure to store all in-memory document;
     public Map<Integer, Document> inMemDocStore = new HashMap<>();
@@ -90,6 +93,8 @@ public class InvertedIndexManager {
         // add all words into inverted index list with current docID
         for(String word : wordList){
             indexList.addDocID(word, docID);
+            // add length into dictionary buffer size
+            dicBufferLen += word.getBytes(StandardCharsets.UTF_8).length + 16;
         }
         // add this Document into in-memory document store
         inMemDocStore.put(docID, document);
@@ -119,7 +124,7 @@ public class InvertedIndexManager {
             PageFileChannel listChannel = PageFileChannel.createOrOpen(listPath);
 
             writeDocStore(documentStore,inMemDocStore);
-            writeDictAndList(dictChannel,listChannel,indexList);
+            writeDictAndList(dictChannel,listChannel,indexList,dicBufferLen);
 
             documentStore.close();
             dictChannel.close();
@@ -152,13 +157,16 @@ public class InvertedIndexManager {
     /**
      * write dictionary and inverted list into files.
      */
-    public void writeDictAndList(PageFileChannel dictChannel, PageFileChannel listChannel,InvertedIndexList invertedList){
+    public void writeDictAndList(PageFileChannel dictChannel, PageFileChannel listChannel,InvertedIndexList invertedList, int dicLen){
         // write dictionary file with element format : wordLen(4) | keyword(arbitrary) | offset(4) | length(4) | page num(4)
         // write inverted list file
         Iterator iterator = invertedList.indexList.entrySet().iterator();
-        ByteBuffer dictByteBuffer = ByteBuffer.allocate(PageFileChannel.PAGE_SIZE);
+        ByteBuffer dictByteBuffer = ByteBuffer.allocate(dicLen);
         ByteBuffer listByteBuffer = ByteBuffer.allocate(PageFileChannel.PAGE_SIZE);
-        int listOffset = 0;
+        if(dicLen == dicBufferLen){
+            dicBufferLen = 0;
+        }
+        int offset = 0;
         int listPageNum = 0;
         while (iterator.hasNext()) {
             Map.Entry<String, List<Integer>> entry = (Map.Entry) iterator.next();
@@ -166,115 +174,51 @@ public class InvertedIndexManager {
             String str = entry.getKey();
             List<Integer> list = entry.getValue();
 
-            byte[] keyword = str.getBytes();
-            int strLength = keyword.length;
-            int remindLen = dictByteBuffer.remaining();
-            byte[] wordLen = intToByte(strLength);
-            byte[] offset = intToByte(listOffset);
-            byte[] length = intToByte(list.size() * 4);
+            byte[] keyword = str.getBytes(StandardCharsets.UTF_8);
+            int wordLen = keyword.length;
+
+            int length = list.size() * 4;
             if (!listByteBuffer.hasRemaining()) {
                 listPageNum++;
                 listChannel.appendPage(listByteBuffer);
                 listByteBuffer.clear();
             }
-            byte[] pageNum = intToByte(listPageNum);
-            if (remindLen >= strLength+16){
-                dictByteBuffer.put(wordLen,0,4);
-                dictByteBuffer.put(keyword, 0, keyword.length);
-                dictByteBuffer.put(offset, 0, 4);
-                dictByteBuffer.put(length, 0, 4);
-                dictByteBuffer.put(pageNum, 0, 4);
-            }else if(remindLen >= strLength+12){
-                dictByteBuffer.put(wordLen,0,4);
-                dictByteBuffer.put(keyword, 0, keyword.length);
-                dictByteBuffer.put(offset, 0, 4);
-                dictByteBuffer.put(length, 0, 4);
-                dictChannel.appendPage(dictByteBuffer);
-                dictByteBuffer.clear();
-                dictByteBuffer.put(pageNum, 0, 4);
-            }else if(remindLen >= strLength+8){
-                dictByteBuffer.put(wordLen,0,4);
-                dictByteBuffer.put(keyword, 0, keyword.length);
-                dictByteBuffer.put(offset, 0, 4);
-                dictChannel.appendPage(dictByteBuffer);
-                dictByteBuffer.clear();
-                dictByteBuffer.put(length, 0, 4);
-                dictByteBuffer.put(pageNum, 0, 4);
-            }else if(remindLen >= strLength+4){
-                dictByteBuffer.put(wordLen,0,4);
-                dictByteBuffer.put(keyword, 0, keyword.length);
-                dictChannel.appendPage(dictByteBuffer);
-                dictByteBuffer.clear();
-                dictByteBuffer.put(offset, 0, 4);
-                dictByteBuffer.put(length, 0, 4);
-                dictByteBuffer.put(pageNum, 0, 4);
-            }else if(remindLen >= 4){
-                dictByteBuffer.put(wordLen,0,4);
-                dictChannel.appendPage(dictByteBuffer);
-                dictByteBuffer.clear();
-                dictByteBuffer.put(keyword, 0, keyword.length);
-                dictByteBuffer.put(offset, 0, 4);
-                dictByteBuffer.put(length, 0, 4);
-                dictByteBuffer.put(pageNum, 0, 4);
-            }else{
-                dictChannel.appendPage(dictByteBuffer);
-                dictByteBuffer.clear();
-            }
+            dictByteBuffer.putInt(wordLen);
+            dictByteBuffer.put(keyword);
+            dictByteBuffer.putInt(offset);
+            dictByteBuffer.putInt(length);
+            dictByteBuffer.putInt(listPageNum);
 
             // add one inverted list
             if (listByteBuffer.remaining() < list.size() * 4) {
                 int remainNum = listByteBuffer.remaining() / 4;
                 for (int i = 0; i < remainNum; i++) {
-                    byte[] docuID = intToByte(list.get(i));
-                    listByteBuffer.put(docuID, 0, 4);
+                    listByteBuffer.put(ByteBuffer.allocate(4).putInt(list.get(i)).array());
                 }
                 listChannel.appendPage(listByteBuffer);
-                listByteBuffer = ByteBuffer.allocate(PageFileChannel.PAGE_SIZE);
+                listByteBuffer.clear();
                 listPageNum++;
-                listOffset = 0;
+                offset = 0;
                 for (int j = remainNum; j < list.size(); j++) {
-                    byte[] docuID = intToByte(list.get(j));
-                    listByteBuffer.put(docuID, 0, 4);
-                    listOffset += 4;
+                    listByteBuffer.put(ByteBuffer.allocate(4).putInt(list.get(j)).array());
+                    offset += 4;
                 }
             } else {
                 for (int j = 0; j < list.size(); j++) {
-                    byte[] docuID = intToByte(list.get(j));
-                    listByteBuffer.put(docuID, 0, 4);
-                    listOffset += 4;
+                    listByteBuffer.put(ByteBuffer.allocate(4).putInt(list.get(j)).array());
+                    offset += 4;
                 }
             }
         }
-        // append the last page of dictionary
-        if (dictByteBuffer.position() > 0) {
-            appendLastPage(dictByteBuffer, dictChannel);
-        }
+        dictChannel.appendAllBytes(dictByteBuffer);
+//        // append the last page of dictionary
+//        if (dictByteBuffer.position() > 0) {
+//            appendLastPage(dictByteBuffer, dictChannel);
+//        }
         // append the last page of list
         if (listByteBuffer.position() > 0) {
             appendLastPage(listByteBuffer, listChannel);
         }
-    }
-
-    /**
-     * converse int into byte[].
-     */
-    public byte[] intToByte(int num){
-        return new byte[] {
-                (byte) ((num >> 24) & 0xFF),
-                (byte) ((num >> 16) & 0xFF),
-                (byte) ((num >> 8) & 0xFF),
-                (byte) (num & 0xFF)
-        };
-    }
-
-    /**
-     * converse byte[] into int.
-     */
-    public int byteToInt(byte[] arr){
-        return   arr[3] & 0xFF |
-                (arr[2] & 0xFF) << 8 |
-                (arr[1] & 0xFF) << 16 |
-                (arr[0] & 0xFF) << 24;
     }
 
     /**
@@ -363,7 +307,8 @@ public class InvertedIndexManager {
                 }
                 invertedList.addList(entry.getKey(),list2);
             }
-            writeDictAndList(dictChannel3, listChannel3, invertedList);
+            writeDictAndList(dictChannel3, listChannel3, invertedList,mergeBufferLen);
+            mergeBufferLen = 0;
 
             documentStore1.close();documentStore2.close();
             dictChannel1.close();dictChannel2.close();
@@ -399,26 +344,20 @@ public class InvertedIndexManager {
         Map<String, DictionaryElement> dictList = new HashMap<>();
         ByteBuffer dictBuffer = dictChannel.readAllPages();
         byte[] dictionary = dictBuffer.array();
-        int offsetLen = 0;
+        int offsetLen = 0; mergeBufferLen += dictionary.length;
         for(int i = 0; i<dictionary.length; i+=offsetLen) {
             // get keyword and its information from dictionary
-            byte[] wordLenArr = new byte[4];
-            System.arraycopy(dictionary, i, wordLenArr, 0, 4);
-            int wordLen = byteToInt(wordLenArr);
+            byte[] wordLenArr = Arrays.copyOfRange(dictionary,i, i+4);
+            int wordLen = ByteBuffer.wrap(wordLenArr).getInt();
             offsetLen = wordLen + 16;
-            byte[] keywordArr = new byte[wordLen];
-            System.arraycopy(dictionary, i + 4, keywordArr, 0, wordLen);
-            String keyword = new String(keywordArr);
-            keyword = keyword.trim();
-            byte[] offsetArr = new byte[4];
-            System.arraycopy(dictionary, i + wordLen + 4, offsetArr, 0, 4);
-            int offset = byteToInt(offsetArr);
-            byte[] lengthArr = new byte[4];
-            System.arraycopy(dictionary, i + wordLen + 8, lengthArr, 0, 4);
-            int length = byteToInt(lengthArr);
-            byte[] pageNumArr = new byte[4];
-            System.arraycopy(dictionary, i + wordLen + 12, pageNumArr, 0, 4);
-            int pageNum = byteToInt(pageNumArr);
+            byte[] keywordArr = Arrays.copyOfRange(dictionary,i+4, i+4+wordLen);
+            String keyword = new String(keywordArr, StandardCharsets.UTF_8);
+            byte[] offsetArr = Arrays.copyOfRange(dictionary,i+4+wordLen, i+8+wordLen);
+            int offset = ByteBuffer.wrap(offsetArr).getInt();
+            byte[] lengthArr = Arrays.copyOfRange(dictionary,i+8+wordLen, i+12+wordLen);
+            int length = ByteBuffer.wrap(lengthArr).getInt();
+            byte[] pageNumArr = Arrays.copyOfRange(dictionary,i+12+wordLen, i+16+wordLen);
+            int pageNum = ByteBuffer.wrap(pageNumArr).getInt();
 
             // break the for loop if the list has not next keyword
             if (keyword.isEmpty()) {
@@ -452,9 +391,8 @@ public class InvertedIndexManager {
 
         List<Integer> indexList = new ArrayList<>();
         for(int j = 0; j < length; j += 4){
-            byte[] docIDNum = new byte[4];
-            System.arraycopy(docIDArr, j, docIDNum,0,4);
-            indexList.add(byteToInt(docIDNum));
+            byte[] docIDNum = Arrays.copyOfRange(docIDArr,j, j+4);
+            indexList.add(ByteBuffer.wrap(docIDNum).getInt());
         }
         return indexList;
     }
@@ -712,23 +650,18 @@ public class InvertedIndexManager {
         int offsetLen = 0;
         for(int i = 0; i<dictBuffer.capacity(); i+=offsetLen){
             // get keyword and its information from dictionary
-            byte[] wordLenArr = new byte[4];
-            System.arraycopy(dictionary,i,wordLenArr,0,4);
-            int wordLen = byteToInt(wordLenArr);
+            byte[] wordLenArr = Arrays.copyOfRange(dictionary,i, i+4);
+            int wordLen = ByteBuffer.wrap(wordLenArr).getInt();
             offsetLen = wordLen + 16;
-            byte[] keywordArr = new byte[wordLen];
-            System.arraycopy(dictionary,i+4,keywordArr,0,wordLen);
-            String keyword = new String(keywordArr);
+            byte[] keywordArr = Arrays.copyOfRange(dictionary,i+4, i+4+wordLen);
+            String keyword = new String(keywordArr,StandardCharsets.UTF_8);
             keyword = keyword.trim();
-            byte[] offsetArr = new byte[4];
-            System.arraycopy(dictionary,i+wordLen+4,offsetArr,0,4);
-            int offset = byteToInt(offsetArr);
-            byte[] lengthArr = new byte[4];
-            System.arraycopy(dictionary,i+wordLen+8,lengthArr,0,4);
-            int length = byteToInt(lengthArr);
-            byte[] pageNumArr = new byte[4];
-            System.arraycopy(dictionary,i+wordLen+12,pageNumArr,0,4);
-            int pageNum = byteToInt(pageNumArr);
+            byte[] offsetArr = Arrays.copyOfRange(dictionary,i+4+wordLen, i+8+wordLen);
+            int offset = ByteBuffer.wrap(offsetArr).getInt();
+            byte[] lengthArr = Arrays.copyOfRange(dictionary,i+8+wordLen, i+12+wordLen);
+            int length = ByteBuffer.wrap(lengthArr).getInt();
+            byte[] pageNumArr = Arrays.copyOfRange(dictionary,i+12+wordLen, i+16+wordLen);
+            int pageNum = ByteBuffer.wrap(pageNumArr).getInt();
 
             // break the for loop if the list has not next keyword
             if(keyword.isEmpty()){
@@ -755,9 +688,9 @@ public class InvertedIndexManager {
 
             List<Integer> indexList = new ArrayList<>();
             for(int j = 0; j < length; j += 4){
-                byte[] docIDNum = new byte[4];
-                System.arraycopy(docIDArr, j, docIDNum,0,4);
-                indexList.add(byteToInt(docIDNum));
+                byte[] docIDNum = Arrays.copyOfRange(docIDArr,j, j+4);
+//                System.arraycopy(docIDArr, j, docIDNum,0,4);
+                indexList.add(ByteBuffer.wrap(docIDNum).getInt());
             }
 
             // add keyword and index list into Map
