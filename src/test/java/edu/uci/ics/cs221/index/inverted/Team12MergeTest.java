@@ -45,9 +45,7 @@ public class Team12MergeTest {
         iim.addDocument(new Document("Implement keyword search, boolean AND search, and boolean OR search"));
         iim.addDocument(new Document("(Optional Extra Credit): Implement deletions"));
 
-        System.out.println(iim.getNumSegments());
         iim.mergeAllSegments();
-        System.out.println(iim.getNumSegments());
         assert iim.getNumSegments() == 1;
 
     }

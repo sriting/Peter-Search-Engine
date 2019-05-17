@@ -69,7 +69,7 @@ public class Team2StressTest {
         try {
             test2();
         } catch (Throwable e) {
-            System.out.println("Team2StressTest test1 FAILED");
+            System.out.println("Team2StressTest test2 FAILED");
             e.printStackTrace();
         }
     }

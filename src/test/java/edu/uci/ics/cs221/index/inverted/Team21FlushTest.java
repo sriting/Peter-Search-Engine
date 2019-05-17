@@ -107,9 +107,6 @@ public class Team21FlushTest {
 
         Map<String, List<Integer>> invertedList = test.getInvertedLists();
         String[] words = {"dog", "cat","penguin"};
-        for(String keyword : invertedList.keySet()){
-            System.out.println(keyword);
-        }
         assertEquals(words.length, invertedList.size());
         for(String word : words){
             assertTrue(invertedList.containsKey(word));

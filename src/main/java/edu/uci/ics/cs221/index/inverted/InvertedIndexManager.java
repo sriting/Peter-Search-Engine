@@ -41,6 +41,7 @@ public class InvertedIndexManager {
 
     public Analyzer analyzer;
     public String indexFolder;
+    public Compressor compressor;
     public InvertedIndexList indexList = new InvertedIndexList();
     private int docID = 0;
     public int segmentCount = 0;
@@ -54,6 +55,12 @@ public class InvertedIndexManager {
     private InvertedIndexManager(String indexFolder, Analyzer analyzer) {
         this.analyzer = analyzer;
         this.indexFolder = indexFolder;
+    }
+
+    private InvertedIndexManager(String indexFolder, Analyzer analyzer, Compressor compressor) {
+        this.analyzer = analyzer;
+        this.indexFolder = indexFolder;
+        this.compressor = compressor;
     }
 
     /**
@@ -71,6 +78,29 @@ public class InvertedIndexManager {
             } else {
                 Files.createDirectories(indexFolderPath);
                 return new InvertedIndexManager(indexFolder, analyzer);
+            }
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    /**
+     * Creates a positional index with the given folder, analyzer, and the compressor.
+     * Compressor must be used to compress the inverted lists and the position lists.
+     *
+     */
+    public static InvertedIndexManager createOrOpenPositional(String indexFolder, Analyzer analyzer, Compressor compressor) {
+        try {
+            Path indexFolderPath = Paths.get(indexFolder);
+            if (Files.exists(indexFolderPath) && Files.isDirectory(indexFolderPath)) {
+                if (Files.isDirectory(indexFolderPath)) {
+                    return new InvertedIndexManager(indexFolder, analyzer, compressor);
+                } else {
+                    throw new RuntimeException(indexFolderPath + " already exists and is not a directory");
+                }
+            } else {
+                Files.createDirectories(indexFolderPath);
+                return new InvertedIndexManager(indexFolder, analyzer, compressor);
             }
         } catch (IOException e) {
             throw new UncheckedIOException(e);
@@ -142,7 +172,7 @@ public class InvertedIndexManager {
      */
     public void writeDocStore(DocumentStore documentStore, Map<Integer, Document> MemDocStore){
         // write all documents from in-memory document store into document database
-        Iterator it = MemDocStore.entrySet().iterator();
+    Iterator it = MemDocStore.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry<Integer, Document> entry = (Map.Entry) it.next();
             documentStore.addDocument(entry.getKey(), entry.getValue());
@@ -185,24 +215,15 @@ public class InvertedIndexManager {
             dictByteBuffer.putInt(listPageNum);
 
             // add one inverted list
-            if (listByteBuffer.remaining() < list.size() * 4) {
-                int remainNum = listByteBuffer.remaining() / 4;
-                for (int i = 0; i < remainNum; i++) {
-                    listByteBuffer.put(ByteBuffer.allocate(4).putInt(list.get(i)).array());
+            for (int i = 0; i < list.size(); i++){
+                if(listByteBuffer.remaining() < 4){
+                    listChannel.appendPage(listByteBuffer);
+                    listByteBuffer.clear();
+                    listPageNum++;
+                    offset = 0;
                 }
-                listChannel.appendPage(listByteBuffer);
-                listByteBuffer.clear();
-                listPageNum++;
-                offset = 0;
-                for (int j = remainNum; j < list.size(); j++) {
-                    listByteBuffer.put(ByteBuffer.allocate(4).putInt(list.get(j)).array());
-                    offset += 4;
-                }
-            } else {
-                for (int j = 0; j < list.size(); j++) {
-                    listByteBuffer.put(ByteBuffer.allocate(4).putInt(list.get(j)).array());
-                    offset += 4;
-                }
+                listByteBuffer.put(ByteBuffer.allocate(4).putInt(list.get(i)).array());
+                offset += 4;
             }
         }
         dictChannel.appendAllBytes(dictByteBuffer);
@@ -257,8 +278,8 @@ public class InvertedIndexManager {
             }
 
             // merge inverted list of invertedIndexList2 into invertedIndexList1
-            String dictFile3 = indexFolder+ "Dictionary" + (8+i) + ".txt";
-            String listFile3 = indexFolder + "InvertedList" + (8+i) + ".txt";
+            String dictFile3 = indexFolder+ "Dictionary" + (DEFAULT_MERGE_THRESHOLD+i) + ".txt";
+            String listFile3 = indexFolder + "InvertedList" + (DEFAULT_MERGE_THRESHOLD+i) + ".txt";
             Path dictPath3 = Paths.get(dictFile3);
             Path listPath3 = Paths.get(listFile3);
             PageFileChannel dictChannel3 = PageFileChannel.createOrOpen(dictPath3);
@@ -267,33 +288,16 @@ public class InvertedIndexManager {
             Map<String, DictionaryElement> dictionary1 = readDictionary(dictChannel1);
             Map<String, DictionaryElement> dictionary2 = readDictionary(dictChannel2);
             Iterator it1 = dictionary1.entrySet().iterator();
-            int pageCount1 = 0; int pageCount2 = 0;
-            ByteBuffer thisPage1 = listChannel1.readPage(pageCount1);
-            ByteBuffer nextPage1 = listChannel1.readPage(pageCount1+1);
-            ByteBuffer thisPage2 = listChannel2.readPage(pageCount2);
-            ByteBuffer nextPage2 = listChannel2.readPage(pageCount2+1);
             while(it1.hasNext()){
                 Map.Entry<String, DictionaryElement> entry = (Map.Entry)it1.next();
                 DictionaryElement dictEle = entry.getValue();
-                if(dictEle.getPageNum() != pageCount1){
-                    pageCount1 = dictEle.getPageNum();
-                    thisPage1.clear();nextPage1.clear();
-                    thisPage1 = listChannel1.readPage(pageCount1);
-                    nextPage1 = listChannel1.readPage(pageCount1+1);
-                }
-                invertedList.addList(entry.getKey(),readInvertedList(thisPage1, nextPage1,dictEle));
+                invertedList.addList(entry.getKey(),readInvertedList(listChannel1,dictEle));
             }
             Iterator it2 = dictionary2.entrySet().iterator();
             while(it2.hasNext()){
                 Map.Entry<String, DictionaryElement> entry = (Map.Entry)it2.next();
                 DictionaryElement dictEle = entry.getValue();
-                if(dictEle.getPageNum() != pageCount2){
-                    pageCount2 = dictEle.getPageNum();
-                    thisPage2.clear();nextPage2.clear();
-                    thisPage2 = listChannel2.readPage(pageCount2);
-                    nextPage2 = listChannel2.readPage(pageCount2+1);
-                }
-                List<Integer> list2 = readInvertedList(thisPage2,nextPage2,dictEle);
+                List<Integer> list2 = readInvertedList(listChannel2,dictEle);
                 for(int j=0; j<list2.size();j++){
                     list2.set(j,doc1Size+list2.get(j));
                 }
@@ -306,7 +310,7 @@ public class InvertedIndexManager {
             dictChannel1.close();dictChannel2.close();
             listChannel1.close();listChannel2.close();
 
-            //delete files
+            // delete files
             File dict1fileAddr = new File(dictFile1);
             dict1fileAddr.delete();
             File list1fileAddr = new File(listFile1);
@@ -318,7 +322,7 @@ public class InvertedIndexManager {
             File doc2fileAddr = new File(docFile2);
             doc2fileAddr.delete();
 
-            // change file name of merged segment
+            // rename files of the merged segment
             File dictFileName = new File(dictFile3);
             dictFileName.renameTo(new File(indexFolder+ "Dictionary" + i + ".txt"));
             File listFileName = new File(listFile3);
@@ -366,19 +370,32 @@ public class InvertedIndexManager {
     /**
      * get inverted list from file according to keyword
      */
-    public List<Integer> readInvertedList(ByteBuffer thisPage, ByteBuffer nextPage, DictionaryElement dictElem){
+    public List<Integer> readInvertedList(PageFileChannel listChannel, DictionaryElement dictElem){
+        int pageNum = dictElem.getPageNum();
         int length = dictElem.getLength();
         int offset = dictElem.getOffset();
+        ByteBuffer listBuffer = listChannel.readPage(pageNum);
 
         // get the inverted list of docID of the keyword
-        byte[] docIDList = thisPage.array();
+        byte[] docIDList = listBuffer.array();
         byte[] docIDArr = new byte[length];
-        if(offset+length > PageFileChannel.PAGE_SIZE){
-            byte[] docIDArr1 = Arrays.copyOfRange(docIDList, offset, PageFileChannel.PAGE_SIZE);
-            docIDList = nextPage.array();
-            byte[] docIDArr2 = Arrays.copyOfRange(docIDList, 0, offset+length-PageFileChannel.PAGE_SIZE);
-            System.arraycopy(docIDArr1, 0, docIDArr, 0, docIDArr1.length);
-            System.arraycopy(docIDArr2, 0, docIDArr, docIDArr1.length, docIDArr2.length);
+        int increasingSize = 0;
+        if(length+offset > PageFileChannel.PAGE_SIZE){
+            for(int i=0; i<length; i+=increasingSize) {
+                if(length+offset-i > PageFileChannel.PAGE_SIZE){
+                    byte[] docIDSubArr = Arrays.copyOfRange(docIDList, offset, PageFileChannel.PAGE_SIZE);
+                    System.arraycopy(docIDSubArr, 0, docIDArr, i, docIDSubArr.length);
+                    listBuffer.clear(); pageNum++;
+                    listBuffer = listChannel.readPage(pageNum);
+                    docIDList = listBuffer.array();
+                    increasingSize = docIDSubArr.length;
+                }else{
+                    byte[] docIDSubArr = Arrays.copyOfRange(docIDList, offset, offset+length-i);
+                    System.arraycopy(docIDSubArr, 0, docIDArr, i, docIDSubArr.length);
+                    increasingSize = docIDSubArr.length;
+                }
+                offset = 0;
+            }
         }else{
             docIDArr = Arrays.copyOfRange(docIDList, offset, offset+length);
         }
@@ -388,6 +405,7 @@ public class InvertedIndexManager {
             byte[] docIDNum = Arrays.copyOfRange(docIDArr,j, j+4);
             indexList.add(ByteBuffer.wrap(docIDNum).getInt());
         }
+
         return indexList;
     }
 
@@ -419,9 +437,7 @@ public class InvertedIndexManager {
 
             Map<String, DictionaryElement> dictionary = readDictionary(dictChannel);
             if(dictionary.containsKey(keyword)){
-                ByteBuffer thisPage = listChannel.readPage(dictionary.get(keyword).getPageNum());
-                ByteBuffer nextPage = listChannel.readPage(dictionary.get(keyword).getPageNum()+1);
-                List<Integer> invertedList = readInvertedList(thisPage, nextPage, dictionary.get(keyword));
+                List<Integer> invertedList = readInvertedList(listChannel, dictionary.get(keyword));
                 for(int index : invertedList){
                     queryResult.add(documentStore.getDocument(index));
                 }
@@ -461,22 +477,12 @@ public class InvertedIndexManager {
             PageFileChannel dictChannel = PageFileChannel.createOrOpen(dictPath);
             PageFileChannel listChannel = PageFileChannel.createOrOpen(listPath);
             List<Integer> andList = new ArrayList<>();
-            int pageNum = 0; boolean isFirst = true;
-            ByteBuffer thisPage =  listChannel.readPage(pageNum);
-            ByteBuffer nextPage = listChannel.readPage(pageNum+1);
-//            System.out.println(documentStore.size());
+            boolean isFirst = true;
             Map<String, DictionaryElement> dictionary = readDictionary(dictChannel);
-//            System.out.println(dictionary.containsKey("GibberishThatNotInDoc"));
 
             for(String keyword : keywords) {
                 if (dictionary.containsKey(keyword)) {
-                    if(dictionary.get(keyword).getPageNum() != pageNum) {
-                        pageNum = dictionary.get(keyword).getPageNum();
-                        thisPage.clear(); nextPage.clear();
-                        thisPage = listChannel.readPage(pageNum);
-                        nextPage = listChannel.readPage(pageNum);
-                    }
-                    List<Integer> invertedList = readInvertedList(thisPage, nextPage, dictionary.get(keyword));
+                    List<Integer> invertedList = readInvertedList(listChannel, dictionary.get(keyword));
 
                     if(isFirst){
                         // add docIDs into list
@@ -504,8 +510,8 @@ public class InvertedIndexManager {
                         }
                         andList = newAndList;
                     }
-                }else if(i==0){
-                    return queryResult.iterator();
+                }else{
+                    break;
                 }
             }
 
@@ -545,21 +551,13 @@ public class InvertedIndexManager {
             DocumentStore documentStore = MapdbDocStore.createOrOpen(docFile);
             PageFileChannel dictChannel = PageFileChannel.createOrOpen(dictPath);
             PageFileChannel listChannel = PageFileChannel.createOrOpen(listPath);
-            int pageNum = 0;
             Set<Integer> orList = new HashSet<>();
-            ByteBuffer thisPage =  listChannel.readPage(pageNum);
-            ByteBuffer nextPage = listChannel.readPage(pageNum+1);
 
             for(String keyword : keywords) {
                 Map<String, DictionaryElement> dictionary = readDictionary(dictChannel);
                 if (dictionary.containsKey(keyword)) {
-                    if(dictionary.get(keyword).getPageNum() != pageNum) {
-                        pageNum = dictionary.get(keyword).getPageNum();
-                        thisPage.clear(); nextPage.clear();
-                        thisPage = listChannel.readPage(pageNum);
-                        nextPage = listChannel.readPage(pageNum);
-                    }
-                    orList.addAll(readInvertedList(thisPage, nextPage, dictionary.get(keyword)));
+                    List<Integer> list = readInvertedList(listChannel, dictionary.get(keyword));
+                    orList.addAll(list);
                 }
             }
 
@@ -571,6 +569,22 @@ public class InvertedIndexManager {
         }
 
         return queryResult.iterator();
+    }
+
+    /**
+     * Performs a phrase search on a positional index.
+     * Phrase search means the document must contain the consecutive sequence of keywords in exact order.
+     *
+     * You could assume the analyzer won't convert each keyword into multiple tokens.
+     * Throws UnsupportedOperationException if the inverted index is not a positional index.
+     *
+     * @param phrase, a consecutive sequence of keywords
+     * @return a iterator of documents matching the query
+     */
+    public Iterator<Document> searchPhraseQuery(List<String> phrase) {
+        Preconditions.checkNotNull(phrase);
+
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -640,11 +654,8 @@ public class InvertedIndexManager {
 
     public Map<String, List<Integer>> getInvertedList(PageFileChannel dictChannel, PageFileChannel listChannel){
         Map<String, List<Integer>> invertedLists = new HashMap<>();
-        int pageCount = 0;
         ByteBuffer dictBuffer = dictChannel.readAllPages();
-        ByteBuffer listBuffer = listChannel.readPage(pageCount);
         byte[] dictionary = dictBuffer.array();
-        byte[] docIDList = listBuffer.array();
         int offsetLen = 0;
         for(int i = 0; i<dictBuffer.capacity(); i+=offsetLen){
             // get keyword and its information from dictionary
@@ -667,31 +678,10 @@ public class InvertedIndexManager {
             }
 
             // get the inverted list of docID of the keyword
-            byte[] docIDArr = new byte[length];
-            if(pageNum != pageCount){
-                listBuffer.clear();
-                listBuffer = listChannel.readPage(pageNum);
-                docIDList = listBuffer.array();
-                pageCount = pageNum;
-            }else if(offset+length > PageFileChannel.PAGE_SIZE){
-                System.arraycopy(docIDList,offset,docIDArr,0,PageFileChannel.PAGE_SIZE-offset);
-                listBuffer.clear();
-                listBuffer = listChannel.readPage(pageNum+1);
-                docIDList = listBuffer.array();
-                pageCount++;
-                System.arraycopy(docIDList,0,docIDArr,PageFileChannel.PAGE_SIZE-offset,length-PageFileChannel.PAGE_SIZE+offset);
-            }else{
-                System.arraycopy(docIDList,offset,docIDArr,0,length);
-            }
-
-            List<Integer> indexList = new ArrayList<>();
-            for(int j = 0; j < length; j += 4){
-                byte[] docIDNum = Arrays.copyOfRange(docIDArr,j, j+4);
-                indexList.add(ByteBuffer.wrap(docIDNum).getInt());
-            }
+            DictionaryElement dictElem = new DictionaryElement(offset,length,pageNum);
 
             // add keyword and index list into Map
-            invertedLists.put(keyword,indexList);
+            invertedLists.put(keyword,readInvertedList(listChannel,dictElem));
         }
         return invertedLists;
     }
@@ -706,5 +696,18 @@ public class InvertedIndexManager {
         }
 
         return mapDocStore;
+    }
+
+    /**
+     * Reads a disk segment of a positional index into memory based on segmentNum.
+     * This function is mainly used for checking correctness in test cases.
+     *
+     * Throws UnsupportedOperationException if the inverted index is not a positional index.
+     *
+     * @param segmentNum n-th segment in the inverted index (start from 0).
+     * @return in-memory data structure with all contents in the index segment, null if segmentNum don't exist.
+     */
+    public PositionalIndexSegmentForTest getIndexSegmentPositional(int segmentNum) {
+        throw new UnsupportedOperationException();
     }
 }
