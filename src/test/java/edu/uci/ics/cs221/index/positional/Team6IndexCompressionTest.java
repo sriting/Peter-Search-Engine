@@ -40,8 +40,8 @@ import static org.junit.Assert.assertTrue;
 
 public class Team6IndexCompressionTest {
 
-    private final String path = "./index/Team6AndSearchTest1";
-    private final String path2 = "./index/Team6AndSearchTest2";
+    private final String path = "./index/Team6AndSearchTest1/";
+    private final String path2 = "./index/Team6AndSearchTest2/";
     private final String docPath = "https://grape.ics.uci.edu/wiki/public/raw-attachment/wiki/cs221-2019-spring-project2/Team2StressTest.txt";
 
     private InvertedIndexManager nonCompressManager = null;

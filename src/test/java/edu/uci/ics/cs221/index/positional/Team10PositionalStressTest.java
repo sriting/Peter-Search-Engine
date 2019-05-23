@@ -23,7 +23,7 @@ public class Team10PositionalStressTest {
     @ClassRule
     public static Timeout classTimeout = Timeout.seconds(600);
 
-    private static String path = "./index/Team10PositionalStressTest";
+    private static String path = "./index/Team10PositionalStressTest/";
     // original document from http://www.gutenberg.org/cache/epub/4276/pg4276.txt
     private static String bookurl = "https://grape.ics.uci.edu/wiki/public/raw-attachment/wiki/cs221-2019-spring-project3/Team10PositionalStressTest.txt";
     private static InvertedIndexManager iim;

@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="41c8792b-e430-4027-899f-1b5757ef013b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/DeltaVarLenCompressor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/DeltaVarLenCompressor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/positional/Team10PositionalStressTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/positional/Team10PositionalStressTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/positional/Team6IndexCompressionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/positional/Team6IndexCompressionTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/positional/Team8PositionalStressTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/positional/Team8PositionalStressTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -22,7 +23,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="109">
-              <caret line="547" column="14" lean-forward="true" selection-start-line="547" selection-start-column="14" selection-end-line="547" selection-end-column="14" />
+              <caret line="547" column="14" selection-start-line="547" selection-start-column="14" selection-end-line="547" selection-end-column="14" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#createOrOpen#0;class#InvertedIndexManager#0" />
@@ -82,14 +83,41 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/DeltaVarLenCompressor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="26">
-              <caret line="31" column="26" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
+            <state relative-caret-position="176">
+              <caret line="41" column="58" selection-start-line="41" selection-start-column="58" selection-end-line="41" selection-end-column="58" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/positional/Team10PositionalStressTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="25" column="69" selection-start-line="25" selection-start-column="69" selection-end-line="25" selection-end-column="69" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/positional/Team6IndexCompressionTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="263">
+              <caret line="43" column="62" selection-start-line="43" selection-start-column="62" selection-end-line="43" selection-end-column="62" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/positional/Team8PositionalStressTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="27" column="72" selection-start-line="27" selection-start-column="72" selection-end-line="27" selection-end-column="72" />
             </state>
           </provider>
         </entry>
@@ -146,7 +174,6 @@
         <option value="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/analysis/wordbreak/Team17WordBreakTokenizerTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/storage/MapdbDocStoreTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexList.java" />
-        <option value="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/positional/Team10PositionalStressTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/analysis/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/PositionList.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/DictionaryElement.java" />
@@ -168,7 +195,6 @@
         <option value="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team9KeywordSearchTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team1StressTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/positional/Team5IndexCompressionTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/positional/Team6IndexCompressionTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team2StressTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team3StressTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/positional/Team11PhraseSearchTest.java" />
@@ -178,6 +204,9 @@
         <option value="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/positional/Team4IndexCompressionTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/DeltaVarLenCompressor.java" />
+        <option value="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/positional/Team10PositionalStressTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/positional/Team6IndexCompressionTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/positional/Team8PositionalStressTest.java" />
       </list>
     </option>
   </component>
@@ -309,8 +338,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.Team5IndexCompressionTest">
-    <configuration name="Team1CompressorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.Team10PositionalStressTest">
+    <configuration name="Team10PositionalStressTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cs221" />
       <extension name="coverage">
         <pattern>
@@ -319,37 +348,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="edu.uci.ics.cs221.index.positional" />
-      <option name="MAIN_CLASS_NAME" value="edu.uci.ics.cs221.index.positional.Team1CompressorTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Team2CompressorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="cs221" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="edu.uci.ics.cs221.index.positional.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="edu.uci.ics.cs221.index.positional" />
-      <option name="MAIN_CLASS_NAME" value="edu.uci.ics.cs221.index.positional.Team2CompressorTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Team3CompressorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="cs221" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="edu.uci.ics.cs221.index.positional.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="edu.uci.ics.cs221.index.positional" />
-      <option name="MAIN_CLASS_NAME" value="edu.uci.ics.cs221.index.positional.Team3CompressorTest" />
+      <option name="MAIN_CLASS_NAME" value="edu.uci.ics.cs221.index.positional.Team10PositionalStressTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -385,13 +384,43 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Team6IndexCompressionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="cs221" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.uci.ics.cs221.index.positional.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="edu.uci.ics.cs221.index.positional" />
+      <option name="MAIN_CLASS_NAME" value="edu.uci.ics.cs221.index.positional.Team6IndexCompressionTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Team8PositionalStressTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="cs221" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.uci.ics.cs221.index.positional.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="edu.uci.ics.cs221.index.positional" />
+      <option name="MAIN_CLASS_NAME" value="edu.uci.ics.cs221.index.positional.Team8PositionalStressTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.Team10PositionalStressTest" />
+        <item itemvalue="JUnit.Team8PositionalStressTest" />
+        <item itemvalue="JUnit.Team6IndexCompressionTest" />
         <item itemvalue="JUnit.Team5IndexCompressionTest" />
         <item itemvalue="JUnit.Team4IndexCompressionTest" />
-        <item itemvalue="JUnit.Team3CompressorTest" />
-        <item itemvalue="JUnit.Team2CompressorTest" />
-        <item itemvalue="JUnit.Team1CompressorTest" />
       </list>
     </recent_temporary>
   </component>
@@ -418,50 +447,50 @@
       <workItem from="1557976616706" duration="17920000" />
       <workItem from="1558047468651" duration="7149000" />
       <workItem from="1558145347342" duration="17000" />
-      <workItem from="1558298732600" duration="112648000" />
+      <workItem from="1558298732600" duration="113409000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Team21PositionalMergeTest_test2 - 2019.05.22 at 23h 36m 06s.xml">
-      <configuration name="Team21PositionalMergeTest.test2" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="Team10PositionalStressTest - 2019.05.22 at 23h 36m 06s.xml">
-      <configuration name="Team10PositionalStressTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="Team11PhraseSearchTest - 2019.05.22 at 23h 39m 11s.xml">
-      <configuration name="Team11PhraseSearchTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="Team12PhraseSearchTest - 2019.05.22 at 23h 39m 21s.xml">
-      <configuration name="Team12PhraseSearchTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="Team14PhraseSearchTest - 2019.05.22 at 23h 39m 36s.xml">
-      <configuration name="Team14PhraseSearchTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="Team17PhraseSearchTest - 2019.05.22 at 23h 40m 24s.xml">
-      <configuration name="Team17PhraseSearchTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="Team18PhraseSearchTest - 2019.05.22 at 23h 40m 29s.xml">
-      <configuration name="Team18PhraseSearchTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="Team19PositionalFlushTest - 2019.05.22 at 23h 40m 34s.xml">
-      <configuration name="Team19PositionalFlushTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="Team20PositionalFlushTest - 2019.05.22 at 23h 40m 37s.xml">
       <configuration name="Team20PositionalFlushTest" configurationId="JUnit" />
     </history-entry>
     <history-entry file="Team21PositionalMergeTest - 2019.05.22 at 23h 40m 43s.xml">
       <configuration name="Team21PositionalMergeTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="Team1CompressorTest - 2019.05.22 at 23h 40m 49s.xml">
+      <configuration name="Team1CompressorTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Team2CompressorTest - 2019.05.22 at 23h 40m 53s.xml">
+      <configuration name="Team2CompressorTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Team3CompressorTest - 2019.05.22 at 23h 40m 56s.xml">
+      <configuration name="Team3CompressorTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Team4IndexCompressionTest - 2019.05.22 at 23h 41m 04s.xml">
+      <configuration name="Team4IndexCompressionTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Team5IndexCompressionTest - 2019.05.22 at 23h 42m 08s.xml">
+      <configuration name="Team5IndexCompressionTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Team6IndexCompressionTest - 2019.05.22 at 23h 46m 23s.xml">
+      <configuration name="Team6IndexCompressionTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Team8PositionalStressTest - 2019.05.22 at 23h 52m 29s.xml">
+      <configuration name="Team8PositionalStressTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Team10PositionalStressTest - 2019.05.22 at 23h 53m 03s.xml">
+      <configuration name="Team10PositionalStressTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="273199000" />
+    <option name="totallyTimeSpent" value="273960000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="804" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17668097" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17668097" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -470,7 +499,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286517" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49928468" visible="true" weight="0.24438202" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49928468" visible="true" weight="0.24438202" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.058988765" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -578,7 +607,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/positional/Team10PositionalStressTest.java" />
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_201.jdk/Contents/Home/src.zip!/java/util/Set.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="122">
@@ -597,13 +625,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="157">
           <caret line="333" selection-start-line="333" selection-end-line="333" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/positional/Team8PositionalStressTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -857,13 +878,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/positional/Team6IndexCompressionTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="467">
-          <caret line="105" selection-start-line="105" selection-start-column="2" selection-end-line="105" selection-end-column="87" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/storage/DocumentStore.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="137">
@@ -943,7 +957,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="109">
-          <caret line="547" column="14" lean-forward="true" selection-start-line="547" selection-start-column="14" selection-end-line="547" selection-end-column="14" />
+          <caret line="547" column="14" selection-start-line="547" selection-start-column="14" selection-end-line="547" selection-end-column="14" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#createOrOpen#0;class#InvertedIndexManager#0" />
@@ -974,11 +988,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/DeltaVarLenCompressor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="26">
-          <caret line="31" column="26" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
+        <state relative-caret-position="176">
+          <caret line="41" column="58" selection-start-line="41" selection-start-column="58" selection-end-line="41" selection-end-column="58" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/positional/Team10PositionalStressTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="25" column="69" selection-start-line="25" selection-start-column="69" selection-end-line="25" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/positional/Team6IndexCompressionTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="43" column="62" selection-start-line="43" selection-start-column="62" selection-end-line="43" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/positional/Team8PositionalStressTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="27" column="72" selection-start-line="27" selection-start-column="72" selection-end-line="27" selection-end-column="72" />
         </state>
       </provider>
     </entry>

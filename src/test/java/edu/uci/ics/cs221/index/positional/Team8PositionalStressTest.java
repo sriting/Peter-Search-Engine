@@ -25,7 +25,7 @@ public class Team8PositionalStressTest {
     private static InvertedIndexManager invertedIndexManager;
     private static int docNum = 200000;
     private static String textUrl = "https://raw.githubusercontent.com/NinoXing/Resource-UCI-CS221/master/Team8StressTest.txt";
-    private static String pathName = "./index/Team8PositionalStressTest";
+    private static String pathName = "./index/Team8PositionalStressTest/";
 
     @BeforeClass
     public static void init(){
