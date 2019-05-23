@@ -30,9 +30,7 @@ public class DeltaVarLenCompressor implements Compressor {
         }
 
         return encodeList;
-
     }
-
 
     public byte[] encodeNumber(int number){
         int numTemp = number; int count = 1;
@@ -72,6 +70,5 @@ public class DeltaVarLenCompressor implements Compressor {
         }
 
         return numList;
-
     }
 }

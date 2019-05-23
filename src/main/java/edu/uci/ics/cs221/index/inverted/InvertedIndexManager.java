@@ -6,7 +6,6 @@ import edu.uci.ics.cs221.analysis.Analyzer;
 import edu.uci.ics.cs221.storage.Document;
 import edu.uci.ics.cs221.storage.DocumentStore;
 import edu.uci.ics.cs221.storage.MapdbDocStore;
-import org.checkerframework.checker.units.qual.A;
 
 import java.io.File;
 import java.io.IOException;
@@ -255,8 +254,13 @@ public class InvertedIndexManager {
                 listChannel.appendPage(listByteBuffer);
                 listByteBuffer.clear();
             }
-            dictByteBuffer.putInt(wordLen);dictByteBuffer.put(keyword);dictByteBuffer.putInt(offset);dictByteBuffer.putInt(invertedArr.length);
-            dictByteBuffer.putInt(listPageNum);dictByteBuffer.putInt(positionListOffset);dictByteBuffer.putInt(positionOffsetArr.length);
+            dictByteBuffer.putInt(wordLen);
+            dictByteBuffer.put(keyword);
+            dictByteBuffer.putInt(offset);
+            dictByteBuffer.putInt(invertedArr.length);
+            dictByteBuffer.putInt(listPageNum);
+            dictByteBuffer.putInt(positionListOffset);
+            dictByteBuffer.putInt(positionOffsetArr.length);
 
             // add one inverted list into inverted list file
             if (listByteBuffer.remaining() >= invertedArr.length){
@@ -274,6 +278,7 @@ public class InvertedIndexManager {
                 }while(listByteBuffer.remaining() < invertedArr.length-stored);
                 if(stored < invertedArr.length) {
                     byte[] remain = Arrays.copyOfRange(invertedArr, stored, invertedArr.length);
+                    listByteBuffer.put(remain);
                     offset += (invertedArr.length - stored);
                 }
             }
@@ -314,13 +319,6 @@ public class InvertedIndexManager {
         }
     }
 
-    public void printByteArr(byte[] arr){
-        List<Integer> templist = compressor.decode(arr);
-        System.out.print("List:");
-        for (Integer integer : templist){
-            System.out.print(integer+" ");
-        }
-    }
 
     /**
      * append the last page of ByteBuffer into this segment.
@@ -377,13 +375,12 @@ public class InvertedIndexManager {
             Map<String, DictionaryElement> dictionary1 = readDictionary(dictChannel1);
             Map<String, DictionaryElement> dictionary2 = readDictionary(dictChannel2);
             Iterator it1 = dictionary1.entrySet().iterator();
-//            System.out.println("Segment "+i); ////
             while(it1.hasNext()){
                 Map.Entry<String, DictionaryElement> entry = (Map.Entry)it1.next();
                 DictionaryElement dictEle = entry.getValue();
                 List<Integer> invList = readInvertedList(listChannel1,dictEle);
                 List<Integer> posOffsetList = readPositionOffsetList(listChannel1,dictEle);
-                Map<Integer, List<Integer>> positionMap = readPositionIndexList(posiChannel1,dictEle.getPositionListOffset(),invList,posOffsetList);
+                Map<Integer, List<Integer>> positionMap = readPositionIndexList(posiChannel1,dictEle.getPositionListOffset(),entry.getKey(),invList,posOffsetList);
                 positionalList.addPositionLists(entry.getKey(),positionMap);
                 invertedList.addList(entry.getKey(),invList);
             }
@@ -393,15 +390,14 @@ public class InvertedIndexManager {
                 DictionaryElement dictEle = entry.getValue();
                 List<Integer> invList = readInvertedList(listChannel2,dictEle);
                 List<Integer> posOffsetList = readPositionOffsetList(listChannel2,dictEle);
-                Map<Integer, List<Integer>> positionMap = readPositionIndexList(posiChannel2,dictEle.getPositionListOffset(),invList,posOffsetList);
+                Map<Integer, List<Integer>> positionMap = readPositionIndexList(posiChannel2,dictEle.getPositionListOffset(),entry.getKey(),invList,posOffsetList);
                 Map<Integer, List<Integer>> newPositionMap = new HashMap<>();
                 // shift docID of all elements in inverted List and position Map
                 for(int j=0; j<invList.size();j++){
                     invList.set(j,doc1Size+invList.get(j));
                 }
                 for(Map.Entry<Integer, List<Integer>> position : positionMap.entrySet()){
-                    newPositionMap.put(doc1Size+position.getKey(), position.getValue());
-                    System.out.println(position.getValue());  ///
+                    newPositionMap.put((doc1Size+position.getKey()), position.getValue());
                 }
                 positionalList.addPositionLists(entry.getKey(),newPositionMap);
                 invertedList.addList(entry.getKey(),invList);
@@ -424,12 +420,18 @@ public class InvertedIndexManager {
             list2fileAddr.delete();
             File doc2fileAddr = new File(docFile2);
             doc2fileAddr.delete();
+            File posi1fileAddr = new File(posiFile1);
+            posi1fileAddr.delete();
+            File posi2fileAddr = new File(posiFile2);
+            posi2fileAddr.delete();
 
             // rename files of the merged segment
             File dictFileName = new File(dictFile3);
             dictFileName.renameTo(new File(indexFolder+ "Dictionary" + i + ".txt"));
             File listFileName = new File(listFile3);
             listFileName.renameTo(new File(indexFolder + "InvertedList" + i + ".txt"));
+            File posiFileNmae = new File(posiFile3);
+            posiFileNmae.renameTo(new File(indexFolder + "PositionList" + i + ".txt"));
             File docFileName = new File(docFile1);
             docFileName.renameTo(new File(indexFolder+ "MapdbDocStore"+ i +".db"));
         }
@@ -469,7 +471,6 @@ public class InvertedIndexManager {
 
             // add element into dictionary map
             DictionaryElement dictElem = new DictionaryElement(docIDListOffset,length,pageNum,positionListOffset,offsetListLength);
-//            System.out.println(keyword+" "+docIDListOffset+" "+length+" "+pageNum+" "+positionListOffset+" "+offsetListLength);
 
             dictList.put(keyword,dictElem);
         }
@@ -485,18 +486,15 @@ public class InvertedIndexManager {
         int offset = dictElem.getOffset();
 
         ByteBuffer listBuffer = listChannel.readPage(pageNum);
-//        System.out.println("length: "+docIDListlength+" offset:"+offset+" pageNum:"+pageNum);  ////
 
         // get the inverted list of docID of the keyword
         byte[] docIDList = listBuffer.array();
         byte[] docIDArr = new byte[docIDListlength];
         int increasingSize;
         if(dictElem.getOffset()+docIDListlength > PageFileChannel.PAGE_SIZE){
-//            System.out.println("in:"+offset);
             for(int i=0; i<docIDListlength; i+=increasingSize) {
                 if(docIDListlength+offset-i > PageFileChannel.PAGE_SIZE){
                     byte[] docIDSubArr = Arrays.copyOfRange(docIDList, offset, PageFileChannel.PAGE_SIZE);
-//                    System.out.println(i+docIDSubArr.length+" i:"+i+" len:"+docIDSubArr.length + " pageNum: "+pageNum);
                     System.arraycopy(docIDSubArr, 0, docIDArr, i, docIDSubArr.length);
                     listBuffer.clear(); pageNum++; offset = 0;
                     listBuffer = listChannel.readPage(pageNum);
@@ -504,8 +502,6 @@ public class InvertedIndexManager {
                     increasingSize = docIDSubArr.length;
                 }else{
                     byte[] docIDSubArr = Arrays.copyOfRange(docIDList, offset, offset+docIDListlength-i);
-//                    System.out.println(compressor.decode(docIDList));
-//                    System.out.println((i+docIDSubArr.length)+" offset:"+offset+" len:"+docIDSubArr.length + " pageNum: "+pageNum);
                     System.arraycopy(docIDSubArr, 0, docIDArr, i, docIDSubArr.length);
                     increasingSize = docIDSubArr.length;
                 }
@@ -514,7 +510,6 @@ public class InvertedIndexManager {
             docIDArr = Arrays.copyOfRange(docIDList, offset, offset+docIDListlength);
         }
 
-//        System.out.println(compressor.decode(docIDArr));
         return compressor.decode(docIDArr);
     }
 
@@ -553,16 +548,14 @@ public class InvertedIndexManager {
         }else{
             posOffsetArr = Arrays.copyOfRange(posOffsetList, offset, offset+posOffsetListLen);
         }
-//        System.out.println(compressor.decode(posOffsetArr));
         return compressor.decode(posOffsetArr);
     }
 
     /**
      * get all the position index lists of the keyword from this segment
      */
-    public Map<Integer, List<Integer>> readPositionIndexList(PageFileChannel posChannel, int start, List<Integer> invertedList,List<Integer> posOffsetList){
+    public Map<Integer, List<Integer>> readPositionIndexList(PageFileChannel posChannel, int start, String keyword, List<Integer> invertedList,List<Integer> posOffsetList){
         int length = posOffsetList.get(posOffsetList.size()-1) - start;
-//        System.out.println(posOffsetList.get(posOffsetList.size()-1)+" "+start);
         byte[] positionArr = new byte[length];
         int pageNum = start/PageFileChannel.PAGE_SIZE;
         ByteBuffer posBuffer = posChannel.readPage(pageNum);
@@ -815,17 +808,11 @@ public class InvertedIndexManager {
                     DictionaryElement dicElem = dictionary.get(keyword);
                     List<Integer> docIDList = readInvertedList(listChannel, dicElem);
                     List<Integer> offsetLis = readPositionOffsetList(listChannel,dicElem);
-                    Map<Integer, List<Integer>> positionMap = readPositionIndexList(posiChannel,dicElem.positionListOffset,docIDList,offsetLis);
+                    Map<Integer, List<Integer>> positionMap = readPositionIndexList(posiChannel,dicElem.positionListOffset,keyword,docIDList,offsetLis);
                     tempPosList.addPositionLists(keyword,positionMap);
                     tempDocIDList.addAll(docIDList);
                 }
             }
-//            ////
-//            Iterator<Map.Entry<Integer, Document>> it = documentStore.iterator();
-//            while(it.hasNext()){
-//                System.out.println(it.next().getValue().getText());
-//            }
-            System.out.println("Segment"+i+" "+tempDocIDList);
 
             // remove docIDs which doesn't contain the consecutive sequence of keywords
             Set<Integer> resultList = new HashSet<>();
@@ -948,7 +935,6 @@ public class InvertedIndexManager {
         Map<String, List<Integer>> invertedLists = new HashMap<>();
         for(Map.Entry<String, DictionaryElement> entry : dictionary.entrySet()){
             // add keyword and index list into Map
-//            System.out.println(entry.getKey());
             invertedLists.put(entry.getKey(),readInvertedList(listChannel,entry.getValue()));
         }
         return invertedLists;
@@ -961,7 +947,6 @@ public class InvertedIndexManager {
         Map<String, List<Integer>> positionOffsetLists = new HashMap<>();
         for(Map.Entry<String, DictionaryElement> entry : dictionary.entrySet()){
             // add keyword and index list into Map
-//            System.out.print("\n"+entry.getKey());
             positionOffsetLists.put(entry.getKey(),readPositionOffsetList(listChannel,entry.getValue()));
 
         }
@@ -1034,7 +1019,7 @@ public class InvertedIndexManager {
         for(Map.Entry<String, DictionaryElement> entry : dictionary.entrySet()){
             String keyword = entry.getKey();
             int start = entry.getValue().getPositionListOffset();
-            Map<Integer, List<Integer>> positionLists = readPositionIndexList(posiChannel,start,invertedLists.get(keyword), positionOffsetLists.get(keyword));
+            Map<Integer, List<Integer>> positionLists = readPositionIndexList(posiChannel,start,keyword,invertedLists.get(keyword), positionOffsetLists.get(keyword));
             positionIndexList.addPositionLists(keyword, positionLists);
         }
         return positionIndexList.returnTable();
