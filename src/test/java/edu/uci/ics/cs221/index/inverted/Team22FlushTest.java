@@ -68,8 +68,8 @@ public class Team22FlushTest {
         Tokenizer tokenizer = new PunctuationTokenizer();
         Stemmer stemmer = new PorterStemmer();
         analyzer = new ComposableAnalyzer(tokenizer, stemmer); // create composable analyzer for documents tokenization
-
-        indexManager = InvertedIndexManager.createOrOpen(folder,analyzer);
+        Compressor compressor = new DeltaVarLenCompressor();
+        indexManager = InvertedIndexManager.createOrOpenPositional(folder,analyzer,compressor);
 
 
         // documents in seg 0
@@ -128,8 +128,8 @@ public class Team22FlushTest {
         Tokenizer tokenizer = new PunctuationTokenizer();
         Stemmer stemmer = new PorterStemmer();
         analyzer = new ComposableAnalyzer(tokenizer, stemmer); // create composable analyzer for documents tokenization
-
-        indexManager = InvertedIndexManager.createOrOpen(folder,analyzer);
+        Compressor compressor = new DeltaVarLenCompressor();
+        indexManager = InvertedIndexManager.createOrOpenPositional(folder,analyzer,compressor);
 
         int flush_threshold = 50; // our flush threshold
         int total_docs = 200; // total documents we gonna add
@@ -193,7 +193,8 @@ public class Team22FlushTest {
         Tokenizer tokenizer = new WordBreakTokenizer();
         Stemmer stemmer = new PorterStemmer();
         analyzer = new ComposableAnalyzer(tokenizer, stemmer);
-        indexManager = InvertedIndexManager.createOrOpen(folder,analyzer);
+        Compressor compressor = new DeltaVarLenCompressor();
+        indexManager = InvertedIndexManager.createOrOpenPositional(folder,analyzer,compressor);
 
         // check if flush does nothing when no docs added
         indexManager.flush();
@@ -215,7 +216,8 @@ public class Team22FlushTest {
         Tokenizer tokenizer = new PunctuationTokenizer();
         Stemmer stemmer = new PorterStemmer();
         analyzer = new ComposableAnalyzer(tokenizer, stemmer); // create composable analyzer for documents tokenization
-        indexManager = InvertedIndexManager.createOrOpen(folder,analyzer);
+        Compressor compressor = new DeltaVarLenCompressor();
+        indexManager = InvertedIndexManager.createOrOpenPositional(folder,analyzer,compressor);
 
         // reset the default_flush_threshold
         int old_threshold = indexManager.DEFAULT_FLUSH_THRESHOLD;
@@ -246,7 +248,8 @@ public class Team22FlushTest {
         Tokenizer tokenizer = new PunctuationTokenizer();
         Stemmer stemmer = new PorterStemmer();
         analyzer = new ComposableAnalyzer(tokenizer, stemmer); // create composable analyzer for documents tokenization
-        indexManager = InvertedIndexManager.createOrOpen(folder,analyzer);
+        Compressor compressor = new DeltaVarLenCompressor();
+        indexManager = InvertedIndexManager.createOrOpenPositional(folder,analyzer,compressor);
 
         // create documents with 4096 characters
         char[] chars = new char[PageFileChannel.PAGE_SIZE];

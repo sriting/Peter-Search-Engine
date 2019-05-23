@@ -1,8 +1,12 @@
-package edu.uci.ics.cs221.index.inverted;
+package edu.uci.ics.cs221.index.positional;
 
 import edu.uci.ics.cs221.analysis.ComposableAnalyzer;
 import edu.uci.ics.cs221.analysis.PorterStemmer;
 import edu.uci.ics.cs221.analysis.PunctuationTokenizer;
+import edu.uci.ics.cs221.index.inverted.DeltaVarLenCompressor;
+import edu.uci.ics.cs221.index.inverted.InvertedIndexManager;
+import edu.uci.ics.cs221.index.inverted.NaiveCompressor;
+import edu.uci.ics.cs221.index.inverted.PageFileChannel;
 import edu.uci.ics.cs221.storage.Document;
 import org.junit.After;
 import org.junit.Before;
@@ -18,7 +22,7 @@ public class Team4IndexCompressionTest {
     Document doc1 = new Document("dog");
     Document doc2 = new Document(String.join(" ", Collections.nCopies(4096, "cat")));
 
-    private static final String indexFolder = "./index/IndexCompressionTest/";
+    private static final String indexFolder = "./index/Team4IndexCompressionTest/";
 
     NaiveCompressor naiveCompressor = null;
     DeltaVarLenCompressor deltaVarLenCompressor = null;
@@ -96,7 +100,7 @@ public class Team4IndexCompressionTest {
         int dvlCount = PageFileChannel.writeCounter;
 
         assertTrue(naiveCount/(double)dvlCount < 4);
-        assertTrue(naiveCount/(double)dvlCount > 3);
+        assertTrue(naiveCount/(double)dvlCount > 1.5);
     }
 
     @After
@@ -122,6 +126,7 @@ public class Team4IndexCompressionTest {
             }
         }
         cacheFolder.delete();
+        new File(indexFolder).delete();
     }
 
 }

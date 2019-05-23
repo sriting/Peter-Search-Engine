@@ -36,7 +36,8 @@ public class Team11MergeTest {
     @Before
     public void before() {
         analyzer = new ComposableAnalyzer(new PunctuationTokenizer(), new PorterStemmer());
-        index = InvertedIndexManager.createOrOpen(indexPath, analyzer);
+        Compressor compressor = new DeltaVarLenCompressor();
+        index = InvertedIndexManager.createOrOpenPositional(indexPath, analyzer, compressor);
     }
 
     @After

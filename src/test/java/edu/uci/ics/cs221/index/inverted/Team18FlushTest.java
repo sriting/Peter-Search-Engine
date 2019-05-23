@@ -20,7 +20,8 @@ public class Team18FlushTest {
 
     @Before
     public void initialize(){
-        manager = InvertedIndexManager.createOrOpen(folderPath, new ComposableAnalyzer(new PunctuationTokenizer(), new PorterStemmer()));
+        Compressor compressor = new DeltaVarLenCompressor();
+        manager = InvertedIndexManager.createOrOpenPositional(folderPath, new ComposableAnalyzer(new PunctuationTokenizer(), new PorterStemmer()), compressor);
     }
 
 

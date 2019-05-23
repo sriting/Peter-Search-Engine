@@ -20,7 +20,8 @@ public class Team10MergeTest {
     @Test
     public void test1() {
         InvertedIndexManager invertedmanager;
-        invertedmanager = InvertedIndexManager.createOrOpen(path, new NaiveAnalyzer());
+        Compressor compressor = new DeltaVarLenCompressor();
+        invertedmanager = InvertedIndexManager.createOrOpenPositional(path, new NaiveAnalyzer(),compressor);
 
         Document doc0 = new Document("what is he doing today");
         Document doc1 = new Document("what a cute dog");
@@ -60,7 +61,8 @@ public class Team10MergeTest {
     @Test
     public void test2() {
         InvertedIndexManager invertedmanager;
-        invertedmanager = InvertedIndexManager.createOrOpen(path, new NaiveAnalyzer());
+        Compressor compressor = new DeltaVarLenCompressor();
+        invertedmanager = InvertedIndexManager.createOrOpenPositional(path, new NaiveAnalyzer(),compressor);
 
         Document doc0 = new Document("cat dog");
         Document doc1 = new Document("dog wolf cat");

@@ -21,7 +21,7 @@ import java.util.List;
 
 
 public class Team11PhraseSearchTest {
-    String indexPath = "./index/Team11PhraseSearchTest";
+    String indexPath = "./index/Team11PhraseSearchTest/";
 
     Document[] documents = new Document[] {
             new Document("That sounds like a good idea. Maybe we should go out to eat beforehand."),

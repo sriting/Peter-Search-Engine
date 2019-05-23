@@ -26,7 +26,8 @@ public class Team7AndSearchTest {
         Analyzer analyzer = new NaiveAnalyzer();
         File INDEX = new File(PATH);
         if (!INDEX.exists()) {INDEX.mkdirs();}
-        manager = InvertedIndexManager.createOrOpen(PATH, analyzer);
+        Compressor compressor = new DeltaVarLenCompressor();
+        manager = InvertedIndexManager.createOrOpenPositional(PATH, analyzer,compressor);
         manager.addDocument(doc);
         manager.addDocument(doc1);
         manager.addDocument(doc2);

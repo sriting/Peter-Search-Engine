@@ -76,7 +76,8 @@ public class Team14MergeTest {
 
     @Before
     public void build() {
-        index = InvertedIndexManager.createOrOpen(path, analyzer);
+        Compressor compressor = new DeltaVarLenCompressor();
+        index = InvertedIndexManager.createOrOpenPositional(path, analyzer,compressor);
         InvertedIndexManager.DEFAULT_FLUSH_THRESHOLD = 1;
     }
 

@@ -22,12 +22,13 @@ import edu.uci.ics.cs221.storage.Document;
 public class Team19FlushTest {
 
     Analyzer an = new ComposableAnalyzer(new PunctuationTokenizer(), token -> token);
+    Compressor compressor = new DeltaVarLenCompressor();
     InvertedIndexManager iim;
     String file = "./index/Team19FlushTest/";
 
     @Before
     public void setup() throws Exception {
-        iim = iim.createOrOpen(file, an);
+        iim = iim.createOrOpenPositional(file, an, compressor);
         iim.DEFAULT_FLUSH_THRESHOLD = 3;
     }
 

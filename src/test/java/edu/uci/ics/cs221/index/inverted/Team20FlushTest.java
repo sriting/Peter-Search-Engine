@@ -37,7 +37,8 @@ public class Team20FlushTest {
         expectedDocStore.put(0, d1);
         expectedDocStore.put(1, d2);
         ComposableAnalyzer analyzer = new ComposableAnalyzer(new PunctuationTokenizer(), new PorterStemmer());
-        InvertedIndexManager ii = InvertedIndexManager.createOrOpen("./index/Team20FlushTest/", analyzer);
+        Compressor compressor = new DeltaVarLenCompressor();
+        InvertedIndexManager ii = InvertedIndexManager.createOrOpenPositional("./index/Team20FlushTest/", analyzer, compressor);
 
         InvertedIndexManager.DEFAULT_FLUSH_THRESHOLD = 2;
         ii.addDocument(d1);
@@ -77,7 +78,8 @@ public class Team20FlushTest {
         expectedDocStore2.put(1, d4);
 
         ComposableAnalyzer analyzer = new ComposableAnalyzer(new PunctuationTokenizer(), new PorterStemmer());
-        InvertedIndexManager ii = InvertedIndexManager.createOrOpen("./index/Team20FlushTest/", analyzer);
+        Compressor compressor = new DeltaVarLenCompressor();
+        InvertedIndexManager ii = InvertedIndexManager.createOrOpenPositional("./index/Team20FlushTest/", analyzer,compressor);
 
         InvertedIndexManager.DEFAULT_FLUSH_THRESHOLD = 2;
         ii.addDocument(d1);
@@ -102,7 +104,8 @@ public class Team20FlushTest {
     @Test
     public void check_empty_mem_buffer() {
         ComposableAnalyzer analyzer = new ComposableAnalyzer(new PunctuationTokenizer(), new PorterStemmer());
-        InvertedIndexManager ii = InvertedIndexManager.createOrOpen("./index/Team20FlushTest/", analyzer);
+        Compressor compressor = new DeltaVarLenCompressor();
+        InvertedIndexManager ii = InvertedIndexManager.createOrOpenPositional("./index/Team20FlushTest/", analyzer,compressor);
 
         ii.flush();
         assertEquals(0, ii.getNumSegments());
@@ -129,7 +132,8 @@ public class Team20FlushTest {
 
 
         ComposableAnalyzer analyzer = new ComposableAnalyzer(new PunctuationTokenizer(), new PorterStemmer());
-        InvertedIndexManager ii = InvertedIndexManager.createOrOpen("./index/Team20FlushTest/", analyzer);
+        Compressor compressor = new DeltaVarLenCompressor();
+        InvertedIndexManager ii = InvertedIndexManager.createOrOpenPositional("./index/Team20FlushTest/", analyzer,compressor);
         ii.DEFAULT_FLUSH_THRESHOLD = 5;
         ii.addDocument(d1);
         ii.flush();

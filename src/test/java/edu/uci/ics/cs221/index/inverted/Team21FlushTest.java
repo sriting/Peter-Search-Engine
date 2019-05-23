@@ -19,6 +19,7 @@ public class Team21FlushTest {
     private InvertedIndexManager manager;
     String indexFolder = "./index/Team21FlushTest/";
     private ComposableAnalyzer analyzer;
+    Compressor compressor = new DeltaVarLenCompressor();
     Document doc1 = new Document("dog cat penguin");
     Document doc2 = new Document("bird cat lion");
     Document doc3 = new Document("fish cat bear");
@@ -26,7 +27,7 @@ public class Team21FlushTest {
     @Before
     public void before(){
         analyzer = new ComposableAnalyzer(new PunctuationTokenizer(), token -> token);
-        manager = InvertedIndexManager.createOrOpen(indexFolder, analyzer);
+        manager = InvertedIndexManager.createOrOpenPositional(indexFolder, analyzer, compressor);
         manager.addDocument(doc1);
         manager.flush();
         manager.addDocument(doc2);

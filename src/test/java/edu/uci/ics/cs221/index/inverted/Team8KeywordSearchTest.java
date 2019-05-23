@@ -31,7 +31,8 @@ public class Team8KeywordSearchTest {
     public void initial() throws Exception {
         //initialize an InvertedIndexManager
         Analyzer analyzer = new NaiveAnalyzer();
-        this.indexManager = InvertedIndexManager.createOrOpen(pathname, analyzer);
+        Compressor compressor = new DeltaVarLenCompressor();
+        this.indexManager = InvertedIndexManager.createOrOpenPositional(pathname, analyzer,compressor);
         //add doc
         indexManager.addDocument(doc1);
         indexManager.addDocument(doc2);

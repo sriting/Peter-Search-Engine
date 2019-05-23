@@ -29,7 +29,8 @@ public class Team4OrSearchTest {
         // Initialize analyzer
         Analyzer analyzer = new NaiveAnalyzer();
         // Initialize InvertedIndexManager
-        this.manager = InvertedIndexManager.createOrOpen(FOLDER, analyzer);
+        Compressor compressor = new DeltaVarLenCompressor();
+        this.manager = InvertedIndexManager.createOrOpenPositional(FOLDER, analyzer,compressor);
         manager.addDocument(doc1);
         manager.addDocument(doc2);
         manager.addDocument(doc3);

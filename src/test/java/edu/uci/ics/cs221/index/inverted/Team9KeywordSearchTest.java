@@ -29,7 +29,8 @@ public class Team9KeywordSearchTest {
     public void setUp() {
         analyzer = new ComposableAnalyzer( new WordBreakTokenizer(), new PorterStemmer());
         indexFolder = "./index/Team9KeywordSearchTest/";
-        invertedIndex = InvertedIndexManager.createOrOpen(indexFolder, analyzer);
+        Compressor compressor = new DeltaVarLenCompressor();
+        invertedIndex = InvertedIndexManager.createOrOpenPositional(indexFolder, analyzer,compressor);
 
         Doc1 = new Document("catdog");
         Doc2 = new Document("dogbird");

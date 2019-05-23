@@ -36,7 +36,8 @@ public class Team17FlushTest {
     @Test
     public void testInit() {
         InvertedIndexManager iim;
-        iim = InvertedIndexManager.createOrOpen("./index/Team17/", new ComposableAnalyzer( new PunctuationTokenizer(), new PorterStemmer()));
+        Compressor compressor = new DeltaVarLenCompressor();
+        iim = InvertedIndexManager.createOrOpenPositional("./index/Team17/", new ComposableAnalyzer( new PunctuationTokenizer(), new PorterStemmer()),compressor);
 
         int expectedNumSegments = 0;
         assertEquals(expectedNumSegments, iim.getNumSegments());
@@ -50,7 +51,8 @@ public class Team17FlushTest {
     @Test
     public void testAddDocumentFlush() {
         InvertedIndexManager iim;
-        iim = InvertedIndexManager.createOrOpen("./index/Team17/", new ComposableAnalyzer( new PunctuationTokenizer(), new PorterStemmer()));
+        Compressor compressor = new DeltaVarLenCompressor();
+        iim = InvertedIndexManager.createOrOpenPositional("./index/Team17/", new ComposableAnalyzer( new PunctuationTokenizer(), new PorterStemmer()),compressor);
 
         Document doc1 = new Document("test");
         Document doc2 = new Document("test case");
@@ -95,7 +97,8 @@ public class Team17FlushTest {
     @Test
     public void testAutoFlush(){
         InvertedIndexManager iim;
-        iim = InvertedIndexManager.createOrOpen("./index/Team17/", new ComposableAnalyzer( new PunctuationTokenizer(), new PorterStemmer()));
+        Compressor compressor = new DeltaVarLenCompressor();
+        iim = InvertedIndexManager.createOrOpenPositional("./index/Team17/", new ComposableAnalyzer( new PunctuationTokenizer(), new PorterStemmer()),compressor);
 
         Document doc1 = new Document("test case auto");
         for (int i=0; i<InvertedIndexManager.DEFAULT_FLUSH_THRESHOLD; i++){
@@ -156,7 +159,8 @@ public class Team17FlushTest {
         InvertedIndexManager.DEFAULT_FLUSH_THRESHOLD = 1000;
 
         InvertedIndexManager iim;
-        iim = InvertedIndexManager.createOrOpen("./index/Team17/", new ComposableAnalyzer( new PunctuationTokenizer(), new PorterStemmer()));
+        Compressor compressor = new DeltaVarLenCompressor();
+        iim = InvertedIndexManager.createOrOpenPositional("./index/Team17/", new ComposableAnalyzer( new PunctuationTokenizer(), new PorterStemmer()),compressor);
 
         Document doc1 = new Document("test case auto");
         Document doc2 = new Document("text base");
@@ -215,7 +219,8 @@ public class Team17FlushTest {
     @Test
     public void testFlushEmptyBuffer() {
         InvertedIndexManager iim;
-        iim = InvertedIndexManager.createOrOpen("./index/Team17/", new ComposableAnalyzer( new PunctuationTokenizer(), new PorterStemmer()));
+        Compressor compressor = new DeltaVarLenCompressor();
+        iim = InvertedIndexManager.createOrOpenPositional("./index/Team17/", new ComposableAnalyzer( new PunctuationTokenizer(), new PorterStemmer()),compressor);
 
         iim.flush();
         iim.flush();

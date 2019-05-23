@@ -36,7 +36,8 @@ public class Team3StressTest {
 
         allDocuments = getOnlineTextFile(textUrl);
         analyzer = new ComposableAnalyzer(new PunctuationTokenizer(),new PorterStemmer());
-        invertedIndexManager = InvertedIndexManager.createOrOpen(indexFolder, analyzer);
+        Compressor compressor = new DeltaVarLenCompressor();
+        invertedIndexManager = InvertedIndexManager.createOrOpenPositional(indexFolder, analyzer,compressor);
         PageFileChannel.resetCounters();
         //Copy the resource text 100000 times so that the total resources will be very large
         //so that we could meet the demand of a Stress Test.(Very large dataset)

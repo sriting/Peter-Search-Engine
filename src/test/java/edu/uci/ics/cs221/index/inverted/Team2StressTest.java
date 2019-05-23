@@ -26,7 +26,8 @@ public class Team2StressTest {
     @Test(timeout = 1200000)
     public void initAndTest() {
         analyzer = new ComposableAnalyzer(new PunctuationTokenizer(),new PorterStemmer());
-        invertedIndexManager = InvertedIndexManager.createOrOpen("./index/Team2StressTest/", analyzer);
+        Compressor compressor = new DeltaVarLenCompressor();
+        invertedIndexManager = InvertedIndexManager.createOrOpenPositional("./index/Team2StressTest/", analyzer,compressor);
         InvertedIndexManager.DEFAULT_FLUSH_THRESHOLD = 200;
         InvertedIndexManager.DEFAULT_MERGE_THRESHOLD = 6;
 

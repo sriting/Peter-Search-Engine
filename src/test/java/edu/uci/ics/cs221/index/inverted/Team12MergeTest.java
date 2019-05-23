@@ -75,12 +75,14 @@ public class Team12MergeTest {
 
     @Before
     public void init() {
-        iim = InvertedIndexManager.createOrOpen("./index/Team12MergeTest/", analyzer);
+        Compressor compressor = new DeltaVarLenCompressor();
+        iim = InvertedIndexManager.createOrOpenPositional("./index/Team12MergeTest/", analyzer,compressor);
         iim.DEFAULT_FLUSH_THRESHOLD = 1;
     }
 
     @After
     public void cleanup() {
+        iim.DEFAULT_FLUSH_THRESHOLD = 1000;
         File p = new File("./index/Team12MergeTest/");
         String[] entries = p.list();
         for (int i = 0; i < entries.length; ++i) {

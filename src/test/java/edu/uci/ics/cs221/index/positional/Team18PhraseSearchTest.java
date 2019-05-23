@@ -1,4 +1,4 @@
-package edu.uci.ics.cs221.index.inverted.positional;
+package edu.uci.ics.cs221.index.positional;
 
 import com.google.common.collect.Table;
 import edu.uci.ics.cs221.analysis.Analyzer;
@@ -21,7 +21,7 @@ import static org.junit.Assert.assertEquals;
 
 public class Team18PhraseSearchTest {
     InvertedIndexManager manager;
-    String folderPath = "./index/Team18PhraseSearchTest";
+    String folderPath = "./index/Team18PhraseSearchTest/";
     Document[] documents1 = new Document[]{
             new Document("this is a test case"),
             new Document("Even though I devoted quantities of time to the test, cases appeared to be like they were rarely covered in class"),
@@ -42,13 +42,15 @@ public class Team18PhraseSearchTest {
 
     @After
     public void clear(){
-        File dir = new File("./index/Team18PhraseTest");
+        File dir = new File("./index/Team18PhraseSearchTest/");
         for (File file: dir.listFiles()){
             if (!file.isDirectory()){
                 file.delete();
             }
         }
         dir.delete();
+        InvertedIndexManager.DEFAULT_FLUSH_THRESHOLD = 1000;
+        InvertedIndexManager.DEFAULT_MERGE_THRESHOLD = 8;
     }
 
     // test if the basic phrase query has been implemented successfully
@@ -90,8 +92,8 @@ public class Team18PhraseSearchTest {
     // test if search spans in multiple segments and merged segments
     @Test
     public void test3(){
-        manager.DEFAULT_FLUSH_THRESHOLD = 2;
-        manager.DEFAULT_MERGE_THRESHOLD = 3;
+        InvertedIndexManager.DEFAULT_FLUSH_THRESHOLD = 2;
+        InvertedIndexManager.DEFAULT_MERGE_THRESHOLD = 4;
         for(Document doc : documents1){
             manager.addDocument(doc);
         }

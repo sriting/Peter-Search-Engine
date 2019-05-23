@@ -20,6 +20,7 @@ public class Team5OrSearchTest {
     private String path = "./index/Team5OrSearchTest/";
     private Analyzer analyzer = new ComposableAnalyzer(new PunctuationTokenizer(), new PorterStemmer());
     private InvertedIndexManager invertedList;
+    Compressor compressor = new DeltaVarLenCompressor();
 
     @Before
     public void setUp() throws Exception {
@@ -27,7 +28,7 @@ public class Team5OrSearchTest {
         if (!directory.exists()) {
             directory.mkdirs();
         }
-        invertedList = InvertedIndexManager.createOrOpen(path, analyzer);
+        invertedList = InvertedIndexManager.createOrOpenPositional(path, analyzer,compressor);
         invertedList.addDocument(new Document("cat dog toy"));
         invertedList.flush();
         invertedList.addDocument(new Document("cat Dot"));

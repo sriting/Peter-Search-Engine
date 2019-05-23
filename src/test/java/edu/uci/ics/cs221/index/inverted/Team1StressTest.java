@@ -46,7 +46,8 @@ public class Team1StressTest {
 
     @Before
     public void initialize() {
-        iim = InvertedIndexManager.createOrOpen(indexDir, analyzer);
+        Compressor compressor = new DeltaVarLenCompressor();
+        iim = InvertedIndexManager.createOrOpenPositional(indexDir, analyzer,compressor);
         InvertedIndexManager.DEFAULT_FLUSH_THRESHOLD = 1;
         PageFileChannel.resetCounters();
     }

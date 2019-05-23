@@ -52,13 +52,14 @@ public class Team6AndSearchTest {
     public void before() {
     // Initialize analyzer
         Analyzer analyzer = new ComposableAnalyzer(new PunctuationTokenizer(), new PorterStemmer());
+        Compressor compressor = new DeltaVarLenCompressor();
 
         File directory = new File(path);
         if (!directory.exists()) {
             directory.mkdirs();
         }
         // Initialize InvertedIndexManager
-        this.manager = InvertedIndexManager.createOrOpen(path, analyzer);
+        this.manager = InvertedIndexManager.createOrOpenPositional(path, analyzer,compressor);
         manager.addDocument(doc1);
         manager.addDocument(doc2);
         manager.addDocument(doc3);
