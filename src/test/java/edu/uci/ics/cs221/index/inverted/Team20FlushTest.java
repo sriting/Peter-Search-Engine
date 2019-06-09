@@ -38,7 +38,7 @@ public class Team20FlushTest {
         expectedDocStore.put(1, d2);
         ComposableAnalyzer analyzer = new ComposableAnalyzer(new PunctuationTokenizer(), new PorterStemmer());
         Compressor compressor = new DeltaVarLenCompressor();
-        InvertedIndexManager ii = InvertedIndexManager.createOrOpenPositional("./index/Team20FlushTest/", analyzer, compressor);
+        InvertedIndexManager ii = InvertedIndexManager.createOrOpenPositional("./index/Team20FlushTest", analyzer, compressor);
 
         InvertedIndexManager.DEFAULT_FLUSH_THRESHOLD = 2;
         ii.addDocument(d1);

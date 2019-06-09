@@ -57,6 +57,7 @@ public class InvertedIndexManager {
     private InvertedIndexManager(String indexFolder, Analyzer analyzer) {
         this.analyzer = analyzer;
         this.indexFolder = indexFolder;
+        this.compressor = new NaiveCompressor();
     }
 
     private InvertedIndexManager(String indexFolder, Analyzer analyzer, Compressor compressor) {
@@ -70,7 +71,8 @@ public class InvertedIndexManager {
      */
     public static InvertedIndexManager createOrOpen(String indexFolder, Analyzer analyzer) {
         try {
-            Path indexFolderPath = Paths.get(indexFolder);
+            indexFolder = indexFolder + "/";
+            Path indexFolderPath = Paths.get(indexFolder).resolve("");
             if (Files.exists(indexFolderPath) && Files.isDirectory(indexFolderPath)) {
                 if (Files.isDirectory(indexFolderPath)) {
                     return new InvertedIndexManager(indexFolder, analyzer);
@@ -93,7 +95,8 @@ public class InvertedIndexManager {
      */
     public static InvertedIndexManager createOrOpenPositional(String indexFolder, Analyzer analyzer, Compressor compressor) {
         try {
-            Path indexFolderPath = Paths.get(indexFolder);
+            indexFolder = indexFolder + "/";
+            Path indexFolderPath = Paths.get(indexFolder).resolve("");
             if (Files.exists(indexFolderPath) && Files.isDirectory(indexFolderPath)) {
                 if (Files.isDirectory(indexFolderPath)) {
                     return new InvertedIndexManager(indexFolder, analyzer, compressor);
@@ -124,7 +127,7 @@ public class InvertedIndexManager {
             // add the positional index into position list
             positionList.addPosition(wordList.get(i), docID, i);
             // add length into dictionary buffer size
-            dicBufferLen += wordList.get(i).getBytes(StandardCharsets.UTF_8).length + 24;
+            dicBufferLen += wordList.get(i).getBytes(StandardCharsets.UTF_8).length + 28;
         }
         // add this Document into in-memory document store
         inMemDocStore.put(docID, document);
@@ -146,15 +149,12 @@ public class InvertedIndexManager {
         String listFile = indexFolder + "InvertedList" + segmentCount + ".txt";
         String storeFile = indexFolder+ "MapdbDocStore"+ segmentCount +".db";
         String positionFile = indexFolder + "PositionList" + segmentCount + ".txt";
-        Path dictPath = Paths.get(dictFile);
-        Path listPath = Paths.get(listFile);
-        Path positionPath = Paths.get(positionFile);
 
         if(inMemDocStore.size()>0) {
             DocumentStore documentStore = MapdbDocStore.createOrOpen(storeFile);
-            PageFileChannel dictChannel = PageFileChannel.createOrOpen(dictPath);
-            PageFileChannel listChannel = PageFileChannel.createOrOpen(listPath);
-            PageFileChannel positionChannel = PageFileChannel.createOrOpen(positionPath);
+            PageFileChannel dictChannel = PageFileChannel.createOrOpen(Paths.get(dictFile));
+            PageFileChannel listChannel = PageFileChannel.createOrOpen(Paths.get(listFile));
+            PageFileChannel positionChannel = PageFileChannel.createOrOpen(Paths.get(positionFile));
 
             writeDocStore(documentStore,inMemDocStore);
 
@@ -194,7 +194,6 @@ public class InvertedIndexManager {
      * write dictionary, inverted list and positional list into this segment.
      */
     public void writeDictInvertedPosition(PageFileChannel dictChannel, PageFileChannel listChannel, PageFileChannel positionChannel, PositionList positionList, InvertedIndexList invertedList, int dicLen){
-        // write dictionary file with element format : wordLen | keyword | docIDList offset | docIDList length | page num | positionList offset | offsetList length
         // write inverted list file
         Iterator iterator = invertedList.indexList.entrySet().iterator();
         ByteBuffer dictByteBuffer = ByteBuffer.allocate(dicLen);
@@ -221,20 +220,25 @@ public class InvertedIndexManager {
 
             // add each position list of each docID for this keyword into position list file
             positionListOffset = positionLength;
+
+            // records the numbers of position list of this keyword in current docID
+            List<Integer> positionNumLen = new ArrayList<>();
+
             for (int i = 0; i < list.size(); i++){
                 byte[] positionArr = compressor.encode(positionList.getPositionList(str, list.get(i)));
+                positionNumLen.add(positionList.getPositionList(str, list.get(i)).size());
 
                 if(posiByteBuffer.remaining() < positionArr.length){
                     int start = 0;
                     while(posiByteBuffer.remaining() < (positionArr.length-start)){
                         int remainLen = posiByteBuffer.remaining();
-                        byte[] first = Arrays.copyOfRange(positionArr,start,remainLen);
+                        byte[] first = Arrays.copyOfRange(positionArr, start, start + remainLen);
                         posiByteBuffer.put(first);
                         positionChannel.appendPage(posiByteBuffer);
                         posiByteBuffer.clear();
                         start += remainLen;
                     }
-                    byte[] second = Arrays.copyOfRange(positionArr, start,positionArr.length);
+                    byte[] second = Arrays.copyOfRange(positionArr, start, positionArr.length);
                     posiByteBuffer.put(second);
                 }else{
                     posiByteBuffer.put(positionArr);
@@ -243,8 +247,10 @@ public class InvertedIndexManager {
                 positionOffsetList.add(positionLength);
             }
 
-            // encode the offset list of position index list
+            // encode the offset list of position list and the numbers of position list of all terms
             byte[] positionOffsetArr = compressor.encode(positionOffsetList);
+            Compressor naiveCompressor = new NaiveCompressor();
+            byte[] positionNumLenArr = naiveCompressor.encode(positionNumLen);
 
             // add one keyword into dictionary
             byte[] keyword = str.getBytes(StandardCharsets.UTF_8);
@@ -254,6 +260,7 @@ public class InvertedIndexManager {
                 listChannel.appendPage(listByteBuffer);
                 listByteBuffer.clear();
             }
+            // write dictionary file with format : wordLen | keyword | docIDList offset | docIDList length | page num | positionList offset | offsetList length | positionNumList length
             dictByteBuffer.putInt(wordLen);
             dictByteBuffer.put(keyword);
             dictByteBuffer.putInt(offset);
@@ -261,6 +268,7 @@ public class InvertedIndexManager {
             dictByteBuffer.putInt(listPageNum);
             dictByteBuffer.putInt(positionListOffset);
             dictByteBuffer.putInt(positionOffsetArr.length);
+            dictByteBuffer.putInt(positionNumLenArr.length);
 
             // add one inverted list into inverted list file
             if (listByteBuffer.remaining() >= invertedArr.length){
@@ -294,7 +302,6 @@ public class InvertedIndexManager {
                     int remainLen = listByteBuffer.remaining();
                     byte[] temp = Arrays.copyOfRange(positionOffsetArr,stored,stored+remainLen);
                     System.arraycopy(temp,0,combine,stored,temp.length);
-
                     listByteBuffer.put(temp);
                     stored += remainLen;
                     listChannel.appendPage(listByteBuffer);
@@ -305,6 +312,32 @@ public class InvertedIndexManager {
                     System.arraycopy(temp,0,combine,stored,temp.length);
                     listByteBuffer.put(temp);
                     offset += (positionOffsetArr.length - stored);
+                }
+            }
+
+            // add one numbers list of position index list into inverted list file
+            if (listByteBuffer.remaining() >= positionNumLenArr.length) {
+                listByteBuffer.put(positionNumLenArr);
+                offset += positionNumLenArr.length;
+            } else {
+                int stored = 0;
+                byte[] combine = new byte[positionNumLenArr.length];
+                do {
+                    int remainLen = listByteBuffer.remaining();
+                    byte[] temp = Arrays.copyOfRange(positionNumLenArr, stored, stored + remainLen);
+                    System.arraycopy(temp, 0, combine, stored, temp.length);
+                    listByteBuffer.put(temp);
+                    stored += remainLen;
+                    listChannel.appendPage(listByteBuffer);
+                    listByteBuffer.clear();
+                    listPageNum++;
+                    offset = 0;
+                } while (listByteBuffer.remaining() < positionNumLenArr.length - stored);
+                if (stored < positionNumLenArr.length) {
+                    byte[] temp = Arrays.copyOfRange(positionNumLenArr, stored, positionNumLenArr.length);
+                    System.arraycopy(temp, 0, combine, stored, temp.length);
+                    listByteBuffer.put(temp);
+                    offset += (positionNumLenArr.length - stored);
                 }
             }
         }
@@ -450,7 +483,7 @@ public class InvertedIndexManager {
             // get keyword and its information from dictionary
             byte[] wordLenArr = Arrays.copyOfRange(dictionary,i, i+4);
             int wordLen = ByteBuffer.wrap(wordLenArr).getInt();
-            offsetLen = wordLen + 24;
+            offsetLen = wordLen + 28;
             byte[] keywordArr = Arrays.copyOfRange(dictionary,i+4, i+4+wordLen);
             String keyword = new String(keywordArr, StandardCharsets.UTF_8);
             byte[] docIDListOffsetArr = Arrays.copyOfRange(dictionary,i+4+wordLen, i+8+wordLen);
@@ -463,6 +496,8 @@ public class InvertedIndexManager {
             int positionListOffset = ByteBuffer.wrap(positionListOffsetArr).getInt();
             byte[] offsetListLengthArr = Arrays.copyOfRange(dictionary,i+20+wordLen, i+24+wordLen);
             int offsetListLength = ByteBuffer.wrap(offsetListLengthArr).getInt();
+            byte[] positionNumLenArr = Arrays.copyOfRange(dictionary, i + 24 + wordLen, i + 28 + wordLen);
+            int posNumListLen = ByteBuffer.wrap(positionNumLenArr).getInt();
 
             // break the for loop if the list has not next keyword
             if (keyword.isEmpty()) {
@@ -470,7 +505,7 @@ public class InvertedIndexManager {
             }
 
             // add element into dictionary map
-            DictionaryElement dictElem = new DictionaryElement(docIDListOffset,length,pageNum,positionListOffset,offsetListLength);
+            DictionaryElement dictElem = new DictionaryElement(docIDListOffset, length, pageNum, positionListOffset, offsetListLength, posNumListLen);
 
             dictList.put(keyword,dictElem);
         }
@@ -549,6 +584,48 @@ public class InvertedIndexManager {
             posOffsetArr = Arrays.copyOfRange(posOffsetList, offset, offset+posOffsetListLen);
         }
         return compressor.decode(posOffsetArr);
+    }
+
+    /**
+     * get the numbers of the position list of each document containing the keyword from this segment
+     */
+    public List<Integer> readPositionNumList(PageFileChannel listChannel, DictionaryElement dictElem) {
+        int offset;
+        int docIDListlength = dictElem.getdocIDListLength();
+        int pageNum = dictElem.getPageNum();
+        int posOffsetListLen = dictElem.getPositionOffsetListLength();
+        int posNumListLength = dictElem.getPositionNumLength();
+
+        offset = (dictElem.getOffset() + docIDListlength + posOffsetListLen) % PageFileChannel.PAGE_SIZE;
+        pageNum += ((dictElem.getOffset() + docIDListlength + posOffsetListLen) / PageFileChannel.PAGE_SIZE);
+        ByteBuffer listBuffer = listChannel.readPage(pageNum);
+
+        // get the inverted list of docID of the keyword
+        byte[] posNumList = listBuffer.array();
+        byte[] posNumListArr = new byte[posNumListLength];
+        int increasingSize = 0;
+        if (offset + posNumListLength > PageFileChannel.PAGE_SIZE) {
+            for (int i = 0; i < posNumListLength; i += increasingSize) {
+                if (posNumListLength + offset - i > PageFileChannel.PAGE_SIZE) {
+                    byte[] posNumListSubArr = Arrays.copyOfRange(posNumList, offset, PageFileChannel.PAGE_SIZE);
+                    System.arraycopy(posNumListSubArr, 0, posNumListArr, i, posNumListSubArr.length);
+                    listBuffer.clear();
+                    pageNum++;
+                    offset = 0;
+                    listBuffer = listChannel.readPage(pageNum);
+                    posNumList = listBuffer.array();
+                    increasingSize = posNumListSubArr.length;
+                } else {
+                    byte[] posNumListSubArr = Arrays.copyOfRange(posNumList, offset, offset + posNumListLength - i);
+                    System.arraycopy(posNumListSubArr, 0, posNumListArr, i, posNumListSubArr.length);
+                    increasingSize = posNumListSubArr.length;
+                }
+            }
+        } else {
+            posNumListArr = Arrays.copyOfRange(posNumList, offset, offset + posNumListLength);
+        }
+        Compressor naiveCompressor = new NaiveCompressor();
+        return naiveCompressor.decode(posNumListArr);
     }
 
     /**
@@ -745,7 +822,6 @@ public class InvertedIndexManager {
                     orList.addAll(list);
                 }
             }
-
             for (Integer index : orList) {
                 queryResult.add(documentStore.getDocument(index));
             }
@@ -860,6 +936,188 @@ public class InvertedIndexManager {
 
         return queryResult.iterator();
     }
+
+    /**
+     * Performs top-K ranked search using TF-IDF.
+     * Returns an iterator that returns the top K documents with highest TF-IDF scores.
+     * <p>
+     * Each element is a pair of <Document, Double (TF-IDF Score)>.
+     * <p>
+     * If parameter `topK` is null, then returns all the matching documents.
+     * <p>
+     * Unlike Boolean Query and Phrase Query where order of the documents doesn't matter,
+     * for ranked search, order of the document returned by the iterator matters.
+     *
+     * @param keywords, a list of keywords in the query
+     * @param topK,     number of top documents weighted by TF-IDF, all documents if topK is null
+     * @return a iterator of top-k ordered documents matching the query
+     */
+    public Iterator<Pair<Document, Double>> searchTfIdf(List<String> keywords, Integer topK) {
+        // maxheap
+        PriorityQueue<Double> scoreQueue = new PriorityQueue<>(11, new Comparator<Double>() {
+            @Override
+            public int compare(Double d1, Double d2) {
+                return d2.compareTo(d1);
+            }
+        });
+        List<Pair<Document, Double>> possibleDoc = new ArrayList<>();
+
+        // analyze keywords of query
+        List<String> analyzedKW = new ArrayList<>();
+        for (int i = 0; i < keywords.size(); i++) {
+            if (!keywords.get(i).isEmpty() && analyzer.analyze(keywords.get(i)).size() > 0) {
+                analyzedKW.add(analyzer.analyze(keywords.get(i)).get(0));
+            }
+        }
+        keywords = analyzedKW;
+
+        // store the term frequencies of query and compute IDF of all keywords in all segments
+        Map<String, Integer> queryTf = new HashMap<>();
+        Map<String, Double> idf = new HashMap<>();
+        for (String keyword : keywords) {
+            int freq = 1;
+            if (queryTf.containsKey(keyword)) {
+                freq += queryTf.get(keyword);
+            }
+            queryTf.put(keyword, freq);
+            int docNum = 0;
+            int docFreq = 0;
+            for (int i = 0; i < segmentCount; i++) {
+                docNum += getNumDocuments(i);
+                docFreq += getDocumentFrequency(i, keyword);
+            }
+            idf.put(keyword, Math.log10((double) docNum / docFreq));
+        }
+
+        // compute TF-IDF and get k documents with top-k scores
+        for (int i = 0; i < segmentCount; i++) {
+            String dictFile = indexFolder + "Dictionary" + i + ".txt";
+            String listFile = indexFolder + "InvertedList" + i + ".txt";
+            PageFileChannel dictChannel = PageFileChannel.createOrOpen(Paths.get(dictFile));
+            PageFileChannel listChannel = PageFileChannel.createOrOpen(Paths.get(listFile));
+            Map<String, DictionaryElement> dictionary = readDictionary(dictChannel);
+            // Map stores < docID, score>
+            Map<Integer, Double> dotProductAccumulator = new HashMap<>();
+            Map<Integer, Double> vectorLengthAccumulator = new HashMap<>();
+            for (String keyword : keywords) {
+                if (dictionary.containsKey(keyword)) {
+                    List<Integer> docIDList = readInvertedList(listChannel, dictionary.get(keyword));
+                    List<Integer> positionNumList = readPositionNumList(listChannel, dictionary.get(keyword));
+                    for (int j = 0; j < docIDList.size(); j++) {
+                        double tfIdf = positionNumList.get(j) * idf.get(keyword);
+                        double dotProduct;
+                        double vectorLength;
+                        int docIDNum = docIDList.get(j);
+                        if (dotProductAccumulator.containsKey(docIDNum)) {
+                            dotProduct = dotProductAccumulator.get(docIDNum);
+                            vectorLength = vectorLengthAccumulator.get(docIDNum);
+                        } else {
+                            dotProduct = 0;
+                            vectorLength = 0;
+                        }
+                        dotProduct += tfIdf * queryTf.get(keyword) * idf.get(keyword);
+                        dotProductAccumulator.put(docIDNum, dotProduct);
+                        vectorLength += tfIdf * tfIdf;
+                        vectorLengthAccumulator.put(docIDNum, vectorLength);
+                    }
+                }
+            }
+            String docFile = indexFolder + "MapdbDocStore" + i + ".db";
+            DocumentStore documentStore = MapdbDocStore.createOrOpen(docFile);
+            Iterator<Integer> docIDIter = documentStore.keyIterator();
+            while (docIDIter.hasNext()) {
+                int currDocId = docIDIter.next();
+                if (dotProductAccumulator.containsKey(currDocId)) {
+                    double score = 0.0;
+                    if (dotProductAccumulator.get(currDocId) != 0 || vectorLengthAccumulator.get(currDocId) != 0) {
+                        score = dotProductAccumulator.get(currDocId) / Math.sqrt(vectorLengthAccumulator.get(currDocId));
+                    }
+                    scoreQueue.add(score);
+                    possibleDoc.add(new Pair<>(documentStore.getDocument(currDocId), score));
+                }
+            }
+
+            dictChannel.close();
+            listChannel.close();
+            documentStore.close();
+        }
+
+        List<Pair<Document, Double>> result = new ArrayList<>();
+        int pollLen = scoreQueue.size();
+        // take top-k elements if the size of queue > k
+        if (topK != null && pollLen > topK) {
+            pollLen = topK;
+        }
+        for (int k = 0; k < pollLen; k++) {
+            Double score = scoreQueue.poll();
+            for (int j = 0; j < possibleDoc.size(); j++) {
+                if (possibleDoc.get(j).getRight().equals(score)) {
+                    result.add(new Pair<>(possibleDoc.get(j).getLeft(), score));
+                    possibleDoc.remove(j);
+                    break;
+                }
+            }
+        }
+        return result.iterator();
+    }
+
+    /**
+     * Returns the total number of documents within the given segment.
+     */
+    public int getNumDocuments(int segmentNum) {
+        String storeFile = indexFolder + "MapdbDocStore" + segmentNum + ".db";
+        DocumentStore documentStore = MapdbDocStore.createOrOpen(storeFile);
+        int size = (int) documentStore.size();
+        documentStore.close();
+        return size;
+    }
+
+    /**
+     * Returns the number of documents containing the token within the given segment.
+     * The token should be already analyzed by the analyzer. The analyzer shouldn't be applied again.
+     */
+    public int getDocumentFrequency(int segmentNum, String token) {
+        String dictFile = indexFolder + "Dictionary" + segmentNum + ".txt";
+        String listFile = indexFolder + "InvertedList" + segmentNum + ".txt";
+        PageFileChannel dictChannel = PageFileChannel.createOrOpen(Paths.get(dictFile));
+        PageFileChannel listChannel = PageFileChannel.createOrOpen(Paths.get(listFile));
+
+        int docFrequency = 0;
+        ByteBuffer dictBuffer = dictChannel.readAllPages();
+        byte[] dictionary = dictBuffer.array();
+        int offsetLen = 0;
+        mergeBufferLen += dictionary.length;
+        for (int i = 0; i < dictionary.length; i += offsetLen) {
+            // get keyword and its information from dictionary
+            byte[] wordLenArr = Arrays.copyOfRange(dictionary, i, i + 4);
+            int wordLen = ByteBuffer.wrap(wordLenArr).getInt();
+            offsetLen = wordLen + 28;
+            byte[] keywordArr = Arrays.copyOfRange(dictionary, i + 4, i + 4 + wordLen);
+            String keyword = new String(keywordArr, StandardCharsets.UTF_8);
+            if (keyword.equals(token)) {
+                byte[] docIDListOffsetArr = Arrays.copyOfRange(dictionary, i + 4 + wordLen, i + 8 + wordLen);
+                int docIDListOffset = ByteBuffer.wrap(docIDListOffsetArr).getInt();
+                byte[] lengthArr = Arrays.copyOfRange(dictionary, i + 8 + wordLen, i + 12 + wordLen);
+                int length = ByteBuffer.wrap(lengthArr).getInt();
+                byte[] pageNumArr = Arrays.copyOfRange(dictionary, i + 12 + wordLen, i + 16 + wordLen);
+                int pageNum = ByteBuffer.wrap(pageNumArr).getInt();
+
+                DictionaryElement dictElem = new DictionaryElement(docIDListOffset, length, pageNum, 0, 0, 0);
+                docFrequency = readInvertedList(listChannel, dictElem).size();
+
+                break;
+            } else {
+                // break the for loop if the list has not next keyword
+                if (keyword.isEmpty()) {
+                    break;
+                }
+            }
+        }
+
+        dictChannel.close();
+        return docFrequency;
+    }
+
 
     /**
      * Iterates through all the documents in all disk segments.

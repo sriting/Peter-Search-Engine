@@ -10,6 +10,7 @@ import java.util.Map;
 
 public class PositionList {
     public Table<String, Integer, List<Integer>> positionList;
+    public int tableSize = 0;
 
     public PositionList(){
         positionList = HashBasedTable.create();
@@ -32,31 +33,18 @@ public class PositionList {
             newList.add(position);
             positionList.put(keyword, docID, newList);
         }
+        tableSize++;
     }
 
     public void addPositionList(String keyword, Integer docID, List<Integer> positions){
-//        if(positionList.rowKeySet().contains(keyword)){
-//            if(positionList.row(keyword).containsKey(docID)){
-//                // if the keyword in this docID exists, add position
-//                positionList.row(keyword).get(docID).addAll(positions);
-//            }else{
-//                // if the keyword exists and the docID doesn't, add a position list of this docID
-//                List<Integer> newList = new ArrayList<>();
-//                newList.addAll(positions);
-//                positionList.row(keyword).put(docID, newList);
-//            }
-//        }else{
-//            // if the keyword doesn't exist, add this keyword, docID and its position list
-//            List<Integer> newList = new ArrayList<>();
-//            newList.addAll(positions);
-//            positionList.put(keyword, docID, newList);
-//        }
         positionList.put(keyword,docID,positions);
+        tableSize += positions.size();
     }
 
     public void addPositionLists(String keyword, Map<Integer, List<Integer>> positionIndexLists){
         for(Map.Entry<Integer, List<Integer>> entry : positionIndexLists.entrySet()){
             positionList.put(keyword, entry.getKey(), entry.getValue());
+            tableSize += entry.getValue().size();
         }
     }
 
@@ -66,9 +54,12 @@ public class PositionList {
 
     public void deleteAll(){
         positionList.clear();
+        tableSize = 0;
     }
 
     public Table<String, Integer, List<Integer>> returnTable(){
         return positionList;
     }
+
+    public int size() { return tableSize;}
 }

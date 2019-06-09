@@ -23,7 +23,7 @@ public class Team8KeywordSearchTest {
     private Document doc2 = new Document("cat and fish");
     private Document doc3 = new Document("fish and dog");
 
-    private String pathname = "./index/Team8KeywordSearchTest/";
+    private String pathname = "./index/Team8KeywordSearchTest";
 
     private InvertedIndexManager indexManager = null;
 

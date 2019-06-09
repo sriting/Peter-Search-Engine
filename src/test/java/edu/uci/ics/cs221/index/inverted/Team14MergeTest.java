@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
 public class Team14MergeTest {
     InvertedIndexManager index;
     Analyzer analyzer = new ComposableAnalyzer(new PunctuationTokenizer(), new PorterStemmer());
-    String path = "./index/Team14MergeTest/";
+    String path = "./index/Team14MergeTest";
 
     Document[] documents1 = new Document[] {
             new Document("This morning I ate eggs"),

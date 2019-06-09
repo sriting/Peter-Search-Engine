@@ -20,7 +20,7 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class Team22FlushTest {
-    String folder = "./index/Team22FlushTest/";
+    String folder = "./index/Team22FlushTest";
 
     InvertedIndexManager indexManager;
     InvertedIndexSegmentForTest indexManagerTest;

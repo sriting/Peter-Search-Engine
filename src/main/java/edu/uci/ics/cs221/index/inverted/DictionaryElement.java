@@ -6,13 +6,15 @@ public class DictionaryElement {
     int pageNum;
     int positionListOffset;
     int positionOffsetListLength;
+    int positionNumLength;
 
-    public DictionaryElement(int offset, int docIDListlength, int pageNum, int positionOffset, int positionOffsetListLength){
+    public DictionaryElement(int offset, int docIDListlength, int pageNum, int positionOffset, int positionOffsetListLength, int positionNumLength){
         this.offset = offset;
         this.docIDListlength = docIDListlength;
         this.pageNum = pageNum;
         this.positionListOffset = positionOffset;
         this.positionOffsetListLength = positionOffsetListLength;
+        this.positionNumLength = positionNumLength;
     }
 
     public int getOffset(){
@@ -32,4 +34,6 @@ public class DictionaryElement {
     public int getPositionOffsetListLength(){
         return this.positionOffsetListLength;
     }
+
+    public int getPositionNumLength() { return this. positionNumLength;}
 }

@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 public class Team4OrSearchTest {
-    private final String FOLDER = "./index/Team4OrSearchTest/";
+    private final String FOLDER = "./index/Team4OrSearchTest";
     private InvertedIndexManager manager = null;
     // Initialize document
     private Document doc1 = new Document("cat dog cat dog");

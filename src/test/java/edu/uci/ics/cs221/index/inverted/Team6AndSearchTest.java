@@ -35,7 +35,7 @@ Yes
 
 public class Team6AndSearchTest {
 
-    private final String path = "./index/Team6AndSearchTest/";
+    private final String path = "./index/Team6AndSearchTest";
 
     private InvertedIndexManager manager = null;
     private Document doc1 = new Document("dog, bone and fishes");
