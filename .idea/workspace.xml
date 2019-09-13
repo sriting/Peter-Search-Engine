@@ -2,30 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="41c8792b-e430-4027-899f-1b5757ef013b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/saveactions_settings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/analysis/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/analysis/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/DictionaryElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/DictionaryElement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/InvertedIndexManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/PositionList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/PositionList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team11MergeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team11MergeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team14MergeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team14MergeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team20FlushTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team20FlushTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team22FlushTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team22FlushTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team4OrSearchTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team4OrSearchTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team6AndSearchTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team6AndSearchTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team8KeywordSearchTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/inverted/Team8KeywordSearchTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/edu/uci/ics/cs221/analysis/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/uci/ics/cs221/analysis/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/edu/uci/ics/cs221/index/inverted/DictionaryElement.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/uci/ics/cs221/index/inverted/DictionaryElement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/edu/uci/ics/cs221/index/inverted/InvertedIndexManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/uci/ics/cs221/index/inverted/InvertedIndexManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/edu/uci/ics/cs221/index/inverted/PositionList.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/uci/ics/cs221/index/inverted/PositionList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/edu/uci/ics/cs221/index/inverted/Team11MergeTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/edu/uci/ics/cs221/index/inverted/Team11MergeTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/edu/uci/ics/cs221/index/inverted/Team14MergeTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/edu/uci/ics/cs221/index/inverted/Team14MergeTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/edu/uci/ics/cs221/index/inverted/Team20FlushTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/edu/uci/ics/cs221/index/inverted/Team20FlushTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/edu/uci/ics/cs221/index/inverted/Team22FlushTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/edu/uci/ics/cs221/index/inverted/Team22FlushTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/edu/uci/ics/cs221/index/inverted/Team4OrSearchTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/edu/uci/ics/cs221/index/inverted/Team4OrSearchTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/edu/uci/ics/cs221/index/inverted/Team6AndSearchTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/edu/uci/ics/cs221/index/inverted/Team6AndSearchTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/edu/uci/ics/cs221/index/inverted/Team8KeywordSearchTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/edu/uci/ics/cs221/index/inverted/Team8KeywordSearchTest.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -39,7 +16,17 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/search/IcsSearchEngineTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="218">
+              <caret line="40" column="43" lean-forward="true" selection-start-line="40" selection-start-column="43" selection-end-line="40" selection-end-column="43" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -158,27 +145,6 @@
               <item name="cs221" type="b2602c69:ProjectViewProjectNode" />
               <item name="cs221-spring19-team-21" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cs221" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cs221-spring19-team-21" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cs221" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cs221-spring19-team-21" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="cs221" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cs221" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cs221-spring19-team-21" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -199,11 +165,7 @@
             <path>
               <item name="cs221" type="b2602c69:ProjectViewProjectNode" />
               <item name="cs221-spring19-team-21" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="cs221" type="462c0819:PsiDirectoryNode" />
-              <item name="search" type="462c0819:PsiDirectoryNode" />
+              <item name="webpages" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -311,8 +273,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.edu.uci.ics.cs221.search in cs221" />
-        <item itemvalue="JUnit.edu.uci.ics.cs221.index.ranking in cs221" />
         <item itemvalue="JUnit.IcsSearchEngineTest" />
+        <item itemvalue="JUnit.edu.uci.ics.cs221.index.ranking in cs221" />
         <item itemvalue="JUnit.FullScanSearcherTest" />
         <item itemvalue="JUnit.IcsSearchEnginePageRankTest" />
       </list>
@@ -352,22 +314,12 @@
       <workItem from="1559603573525" duration="68000" />
       <workItem from="1559682507014" duration="1467000" />
       <workItem from="1559788900187" duration="43240000" />
+      <workItem from="1560128211777" duration="455000" />
+      <workItem from="1560138584717" duration="502000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="IcsSearchEnginePageRankTest - 2019.06.08 at 23h 11m 10s.xml">
-      <configuration name="IcsSearchEnginePageRankTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="FullScanSearcherTest - 2019.06.08 at 23h 11m 18s.xml">
-      <configuration name="FullScanSearcherTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="IcsSearchEngineTest - 2019.06.08 at 23h 11m 30s.xml">
-      <configuration name="IcsSearchEngineTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="IcsSearchEngineTest - 2019.06.08 at 23h 15m 28s.xml">
-      <configuration name="IcsSearchEngineTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="IcsSearchEngineTest - 2019.06.08 at 23h 22m 08s.xml">
       <configuration name="IcsSearchEngineTest" configurationId="JUnit" />
     </history-entry>
@@ -386,14 +338,27 @@
     <history-entry file="edu_uci_ics_cs221_search_in_cs221 - 2019.06.08 at 23h 37m 00s.xml">
       <configuration name="edu.uci.ics.cs221.search in cs221" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="edu_uci_ics_cs221_index_ranking_in_cs221 - 2019.06.09 at 17h 57m 40s.xml">
+      <configuration name="edu.uci.ics.cs221.index.ranking in cs221" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="edu_uci_ics_cs221_search_in_cs221 - 2019.06.09 at 17h 59m 34s.xml">
+      <configuration name="edu.uci.ics.cs221.search in cs221" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="IcsSearchEngineTest - 2019.06.09 at 18h 02m 42s.xml">
+      <configuration name="IcsSearchEngineTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="edu_uci_ics_cs221_search_in_cs221 - 2019.06.09 at 20h 51m 51s.xml">
+      <configuration name="edu.uci.ics.cs221.search in cs221" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="344284000" />
+    <option name="totallyTimeSpent" value="345241000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="804" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17596567" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18025751" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -402,7 +367,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286517" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49928468" weight="0.26264045" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49928468" weight="0.44101125" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.37921348" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -578,20 +543,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/DocID.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="37" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/ranking/Team21TfIdfTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9">
-          <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/DocID.java" />
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/index/ranking/Team21TfIdfTest.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/index/inverted/Compressor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -751,24 +704,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webpages/url.tsv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webpages/cleaned/3">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webpages/cleaned/2">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webpages/cleaned/1">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webpages/cleaned/0">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webpages/cleaned/110">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/webpages/url.tsv" />
+    <entry file="file://$PROJECT_DIR$/webpages/cleaned/3" />
+    <entry file="file://$PROJECT_DIR$/webpages/cleaned/2" />
+    <entry file="file://$PROJECT_DIR$/webpages/cleaned/1" />
+    <entry file="file://$PROJECT_DIR$/webpages/cleaned/0" />
+    <entry file="file://$PROJECT_DIR$/webpages/cleaned/110" />
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/uci/ics/cs221/analysis/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
@@ -821,20 +762,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webpages/id-graph.tsv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/webpages/id-graph.tsv" />
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_201.jdk/Contents/Home/src.zip!/java/util/Arrays.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="156">
           <caret line="3515" column="25" selection-start-line="3515" selection-start-column="25" selection-end-line="3515" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/search/IcsSearchEngineTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="31" selection-start-line="31" selection-end-line="31" />
         </state>
       </provider>
     </entry>
@@ -882,6 +814,13 @@
             <element signature="e#58398#60519#0" />
             <element signature="e#60525#61383#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/uci/ics/cs221/search/IcsSearchEngineTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="40" column="43" lean-forward="true" selection-start-line="40" selection-start-column="43" selection-end-line="40" selection-end-column="43" />
         </state>
       </provider>
     </entry>
